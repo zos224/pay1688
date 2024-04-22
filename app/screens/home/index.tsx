@@ -39,7 +39,7 @@ const HomePage = ({ values }: typeProps) => {
   const [moTigia, setMoTigia] = useState(false);
   const [moTinhCuoc, setMoTinhCuoc] = useState(false);
   const [moVandon, setMoVandon] = useState(false);
-  const modalRef = useRef<HTMLElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const handleAnimationEnd = () => {
     if (modalRef.current != null && modalRef.current.classList.contains("animate-left-to-right")) {
         modalRef.current.classList.remove("animate-left-to-right");
