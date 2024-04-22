@@ -42,9 +42,20 @@ const config: Config = {
       width: {
         100: "400px"
       },
-      height: {
-        100: "350px"
-      }
+      keyframes: {
+        "left-to-right": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+        "right-to-left": {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0)" },
+        }
+      },
+      animation: {
+        "left-to-right": "left-to-right 0.2s ease-in-out",
+        "right-to-left": "right-to-left 0.2s ease-in-out",
+      },
     },
   },
   plugins: [],

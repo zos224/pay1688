@@ -13,7 +13,7 @@ import "swiper/css";
 import { typeHomePage } from "@/api/type/settings";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const slides = [
   "/images/aliexpress-logo.png",
@@ -39,7 +39,23 @@ const HomePage = ({ values }: typeProps) => {
   const [moTigia, setMoTigia] = useState(false);
   const [moTinhCuoc, setMoTinhCuoc] = useState(false);
   const [moVandon, setMoVandon] = useState(false);
+  const modalRef = useRef<HTMLElement>(null);
+  const handleAnimationEnd = () => {
+    if (modalRef.current != null && modalRef.current.classList.contains("animate-left-to-right")) {
+        modalRef.current.classList.remove("animate-left-to-right");
+        modalRef.current.classList.add("animate-right-to-left");
+        setMoTigia(false);
+        setMoTinhCuoc(false);
+        setMoVandon(false);
+    }
+  };
 
+  const closeModal = () => {
+    if (modalRef.current != null) {
+      modalRef.current.classList.remove("animate-right-to-left");
+      modalRef.current.classList.add("animate-left-to-right");
+    }
+  }
   useAOS();
 
   return (
@@ -47,20 +63,20 @@ const HomePage = ({ values }: typeProps) => {
       <div className="z-10 fixed top-[180px]  right-0">
         {!moTigia && !moTinhCuoc && !moVandon ? 
         (
-        <div className=" flex flex-col items-end w-52 gap-3  text-blue-10">
-          <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="group h-10 rounded-l-full p-5 bg-white translate-x-3/4 hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
+        <div className=" flex flex-col items-end w-52 gap-3 text-blue-10">
+          <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="group h-10 rounded-l-full p-5 bg-gray-3 translate-x-3/4 hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
             <FontAwesomeIcon icon={faWallet} className="size-6" />
             <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap">
               Tính cước vận chuyển
             </span>
           </button>
-          <button onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}} className="group h-10 rounded-l-full p-5 bg-white translate-x-2/3 hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
+          <button onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}} className="group h-10 rounded-l-full p-5 bg-gray-3 translate-x-2/3 hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
             <FontAwesomeIcon icon={faUsd} className="size-6" />
             <span className="opacity-0 group-hover:opacity-100 ">
               Tra cứu tỉ giá
             </span>
           </button>
-          <button onClick={() => {setMoVandon(true); setMoTigia(false); setMoTinhCuoc(false)}} className="group h-10 rounded-l-full p-5 bg-white translate-x-[71%] hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
+          <button onClick={() => {setMoVandon(true); setMoTigia(false); setMoTinhCuoc(false)}} className="group h-10 rounded-l-full p-5 bg-gray-3 translate-x-[71%] hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
             <FontAwesomeIcon icon={faTruck} className="size-6" />
             <span className="opacity-0 group-hover:opacity-100 ">
               Tra cứu vận đơn
@@ -68,7 +84,7 @@ const HomePage = ({ values }: typeProps) => {
           </button>
         </div> 
         ) : (
-          <div className="flex flex-col items-end">
+          <div ref={modalRef} onAnimationEnd={handleAnimationEnd} className="flex flex-col items-end animate-right-to-left">
             <div className="flex w-fit items-center bg-gray-5 rounded-tl-xl">
               <div className={`px-5 rounded-tl-xl py-3 cursor-pointer ${moTinhCuoc ? "bg-white" : "text-white"}`} onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}}>
                 <FontAwesomeIcon icon={faWallet} className="size-6" />
@@ -79,7 +95,7 @@ const HomePage = ({ values }: typeProps) => {
               <div className={`px-5 py-3 cursor-pointer ${moVandon ? "bg-white" : "text-white"}`} onClick={() => {setMoVandon(true); setMoTigia(false); setMoTinhCuoc(false)}}>
                 <FontAwesomeIcon icon={faTruck} className="size-6" />
               </div>
-              <div className={`px-5 py-3 cursor-pointer text-white`} onClick={() => {setMoTigia(false); setMoTinhCuoc(false); setMoVandon(false)}}>
+              <div className={`px-5 py-3 cursor-pointer text-white`} onClick={closeModal}>
                 <FontAwesomeIcon icon={faChevronRight} className="size-6"/>
               </div>
             </div>
@@ -248,9 +264,9 @@ const HomePage = ({ values }: typeProps) => {
         className={`min-h-[60vh] h-fit pb-32 pt-[100px] 
          bg-no-repeat bg-center bg-cover`}
       >
-        <div className="uppercase w-fit mx-auto px-2 mt-16 bg-yellow-50 text-red-600 text-center lg:text-3xl text-xl">pay1688 hệ thống - thanh toán - ký gửi - hàng đầu việt nam</div>
+        <div data-aos="zoom-in-up" data-aos-duration="500" className="uppercase w-fit mx-auto px-2 mt-16 font-semibold text-blue-10 text-center lg:text-3xl text-xl">pay1688 hệ thống - thanh toán - ký gửi - hàng đầu việt nam</div>
         <div className="flex justify-around container w-9/12 pt-20 lg:pt-[117px] gap-10 lg:flex-row flex-col">
-          <div className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10">
+          <div data-aos="fade-right" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20">
             <Image
               src={values?.depositVnTq?.logo || ""}
               width={40}
@@ -265,7 +281,7 @@ const HomePage = ({ values }: typeProps) => {
             </div>
             <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
           </div>
-          <div className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 transition-all duration-300">
+          <div data-aos="fade-left" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20 transition-all duration-300">
             <Image
               src={values?.depositTqVn?.logo || ""}
               width={40}
@@ -299,13 +315,13 @@ const HomePage = ({ values }: typeProps) => {
           alt="alipay"
         />
         <div className="flex-1">
-          <div className="title lg:text-3xl text-center mx-auto">
+          <div data-aos="fade-down" className="title lg:text-3xl text-center mx-auto">
             {(values as any)?.title8 || ""}
           </div>
-          <div className="mt-[62px] text-xl">
+          <div data-aos="fade-up" className="mt-[62px] text-xl">
             {values?.paymentService?.description}
           </div>
-          <div className="mt-[72px] text-center lg:text-left flex justify-center">
+          <div data-aos="zoom-in" className="mt-[72px] text-center lg:text-left flex justify-center">
             <button className="bg-blue-10 hover:bg-blue-20 text-white px-4 py-2">
               <Link href={values?.paymentService?.url || ""}>
                 Tra cứu tỷ giá hôm nay
@@ -336,7 +352,7 @@ const HomePage = ({ values }: typeProps) => {
         </div>
         <div>
           <Image
-            src="/images/banggia.png"
+            src="/images/banggia.PNG"
             width={562}
             height={406}
             className="w-full object-contain"
