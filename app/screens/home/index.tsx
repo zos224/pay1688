@@ -1,5 +1,5 @@
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
-import { faTruck, faWallet } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faTruck, faWallet } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import BaseButton from "@/components/common/BaseButton";
@@ -13,6 +13,7 @@ import "swiper/css";
 import { typeHomePage } from "@/api/type/settings";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 const slides = [
   "/images/aliexpress-logo.png",
@@ -35,34 +36,211 @@ const HomePage = ({ values }: typeProps) => {
   // React.useEffect(() => {
   //   handleSettings?.getSetting();
   // }, []);
+  const [moTigia, setMoTigia] = useState(false);
+  const [moTinhCuoc, setMoTinhCuoc] = useState(false);
+  const [moVandon, setMoVandon] = useState(false);
 
   useAOS();
 
   return (
     <div className="relative overflow-x-hidden">
-      <div className=" z-10 flex flex-col items-end w-52 gap-5 absolute top-[180px] text-blue-10 right-0">
-        <button className="group h-10 rounded-l-full p-5 bg-white translate-x-3/4 hover:translate-x-0 inline-flex gap-2 duration-500 ease-linear transition-all items-center">
-          <FontAwesomeIcon icon={faWallet} className="size-6" />
-          <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap">
-            <Link href={values?.calculateShippingChargeUrl || ""}>
+      <div className="z-10 fixed top-[180px]  right-0">
+        {!moTigia && !moTinhCuoc && !moVandon ? 
+        (
+        <div className=" flex flex-col items-end w-52 gap-3  text-blue-10">
+          <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="group h-10 rounded-l-full p-5 bg-white translate-x-3/4 hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
+            <FontAwesomeIcon icon={faWallet} className="size-6" />
+            <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap">
               Tính cước vận chuyển
-            </Link>
-          </span>
-        </button>
-        <button className="group h-10 rounded-l-full p-5 bg-white inline-flex gap-2 translate-x-2/3  duration-500 hover:translate-x-0 transition-all items-center">
-          <FontAwesomeIcon icon={faUsd} className="size-6" />
-          <span className="opacity-0 group-hover:opacity-100 ">
-            <Link href={values?.lookUpThePriceUrl || ""}> Tra cứu tỉ giá</Link>
-          </span>
-        </button>
-        <button className="group h-10 rounded-l-full p-5 bg-white inline-flex gap-2 translate-x-[71%]  duration-500 hover:translate-x-0 transition-all items-center">
-          <FontAwesomeIcon icon={faTruck} className="size-6" />
-          <span className="opacity-0 group-hover:opacity-100 ">
-            <Link href={values?.lookUpBillUrl || ""}> Tra cứu vận đơn</Link>
-          </span>
-        </button>
+            </span>
+          </button>
+          <button onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}} className="group h-10 rounded-l-full p-5 bg-white translate-x-2/3 hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
+            <FontAwesomeIcon icon={faUsd} className="size-6" />
+            <span className="opacity-0 group-hover:opacity-100 ">
+              Tra cứu tỉ giá
+            </span>
+          </button>
+          <button onClick={() => {setMoVandon(true); setMoTigia(false); setMoTinhCuoc(false)}} className="group h-10 rounded-l-full p-5 bg-white translate-x-[71%] hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
+            <FontAwesomeIcon icon={faTruck} className="size-6" />
+            <span className="opacity-0 group-hover:opacity-100 ">
+              Tra cứu vận đơn
+            </span>
+          </button>
+        </div> 
+        ) : (
+          <div className="flex flex-col items-end">
+            <div className="flex w-fit items-center bg-gray-5 rounded-tl-xl">
+              <div className={`px-5 rounded-tl-xl py-3 cursor-pointer ${moTinhCuoc ? "bg-white" : "text-white"}`} onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}}>
+                <FontAwesomeIcon icon={faWallet} className="size-6" />
+              </div>
+              <div className={`px-5 py-3 cursor-pointer ${moTigia ? "bg-white" : "text-white"}`} onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}}>
+                <FontAwesomeIcon icon={faUsd} className="size-6" />
+              </div>
+              <div className={`px-5 py-3 cursor-pointer ${moVandon ? "bg-white" : "text-white"}`} onClick={() => {setMoVandon(true); setMoTigia(false); setMoTinhCuoc(false)}}>
+                <FontAwesomeIcon icon={faTruck} className="size-6" />
+              </div>
+              <div className={`px-5 py-3 cursor-pointer text-white`} onClick={() => {setMoTigia(false); setMoTinhCuoc(false); setMoVandon(false)}}>
+                <FontAwesomeIcon icon={faChevronRight} className="size-6"/>
+              </div>
+            </div>
+            <div className="w-100 bg-white p-3 rounded-l-md max-h-96 overflow-auto">
+              {moTinhCuoc && 
+                <div>
+                  <div className="border-b text-xl uppercase py-2">
+                    Tính cước vận chuyển TQ-VN
+                  </div>
+                  <div className="flex gap-2 text-sm mt-3">
+                    <div className="w-1/3">
+                      <label>Khối lượng (Kg)</label>
+                      <input className="w-full p-2 mt-2 border border-gray-10 rounded-md outline-blue-10" placeholder="Khối lượng"></input>
+                    </div>
+                    <div className="w-2/3">
+                      <label>Kích thước ( D x R x C) (cm) </label>
+                      <div className="flex gap-2 mt-2">
+                        <input className="w-full p-2 border border-gray-10 rounded-md outline-blue-10" placeholder="Dài"></input>
+                        <input className="w-full p-2 border border-gray-10 rounded-md outline-blue-10" placeholder="Rộng"></input>
+                        <input className="w-full p-2 border border-gray-10 rounded-md outline-blue-10" placeholder="Cao"></input>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-2 text-sm">
+                    <label>Giá trị hàng hóa</label>
+                    <input className="w-full p-2 border border-gray-10 rounded-md outline-blue-10 mt-2" placeholder="Giá trị hàng hóa"></input>
+                  </div>
+                  <div className="mt-2 text-sm">
+                    <label>Chọn kho nhận ở TQ</label>
+                    <select className="w-full p-2 border border-gray-10 rounded-md outline-blue-10 mt-2">
+                      <option>Thẩm Quyến</option>
+                      <option>Đại Hán</option>
+                      <option>Kinh Thành</option>
+                    </select>
+                  </div>
+                  <div className="mt-2 text-sm">
+                    <label>Chọn kho nhận ở VN</label>
+                    <select className="w-full p-2 border border-gray-10 rounded-md outline-blue-10 mt-2"> 
+                      <option>Hà Nội</option>
+                      <option>Đà Nẵng</option>
+                      <option>TP Hồ Chí Minh</option>
+                    </select>
+                  </div>
+                  <div className="mt-2 pb-4 text-sm">
+                    <label>Chọn các dịch vụ đi kèm</label>
+                    <div className="flex items-center flex-wrap gap-y-2 mt-2">
+                      <div className="flex items-center w-1/3">
+                        <input type="checkbox" className="mr-2 peer relative appearance-none w-5 h-5 rounded-full border border-black checked:bg-blue-10" />
+                        <label>Nẹp giấy</label>
+                      </div>
+                      <div className="flex items-center w-1/3">
+                        <input type="checkbox" className="mr-2 peer relative appearance-none w-5 h-5 rounded-full border border-black checked:bg-blue-10" />
+                        <label>Đóng gỗ</label>
+                      </div>
+                      <div className="flex items-center w-1/3">
+                        <input type="checkbox" className="mr-2 peer relative appearance-none w-5 h-5 rounded-full border border-black checked:bg-blue-10" />
+                        <label>Dễ vỡ</label>
+                      </div>
+                      <div className="flex items-center w-1/3">
+                        <input type="checkbox" className="mr-2 peer relative appearance-none w-5 h-5 rounded-full border border-black checked:bg-blue-10" />
+                        <label>Bảo hiểm</label>
+                      </div>
+                      <div className="flex items-center w-1/3">
+                        <input type="checkbox" className="mr-2 peer relative appearance-none w-5 h-5 rounded-full border border-black checked:bg-blue-10" />
+                        <label>Kiểm hàng</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="pt-5 border-t border-black">
+                      <label>Giá trị vận chuyển ước tính</label>
+                      <div className="flex items-center w-full bg-gray-3 rounded-full px-4 font-bold mt-2">
+                        <input className="border-none outline-none p-2 w-full bg-gray-3 rounded-full" type="text" placeholder="0.00"></input>
+                        <span>vnđ</span>
+                      </div>
+                      <i className="text-sm">Hai triệu sáu trăm mười lăm nghìn đồng</i>
+                  </div>
+                  <div>
+                    <button className="w-full bg-blue-10 text-white hover:bg-blue-20 rounded-md p-2 mt-4">Tạo đơn vận chuyển</button>
+                  </div>
+                </div>
+              }
+              {moTigia &&
+                <div>
+                  <div className="border-b text-xl uppercase py-2">
+                    Tra cứu tỉ giá
+                  </div>
+                  <div className="mt-4">
+                    <label>Nhập số tiền cần thanh toán hộ</label>
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center w-3/4 bg-gray-3 rounded-full px-4 font-bold mt-2">
+                        <input className="border-none outline-none p-2 w-full bg-gray-3 rounded-full" min={0} type="number" inputMode="decimal" placeholder="0"></input>
+                        <span>NDT(¥)</span>
+                      </div>
+                      <div className="w-1/4 mt-2">
+                        <button className="bg-blue-10 hover:bg-blue-20 text-white rounded-md w-full p-2">Tra cứu</button>
+                      </div>
+                    </div>
+                    <i className="text-sm">Số tệ càng nhiều, Pay1688 sẽ áp dụng tỉ giá càng thấp</i>
+                  </div>
+                  <div className="mt-6">
+                    <div className="font-semibold">Kết quả quy đổi</div>
+                    <div className="flex items-center w-full bg-gray-3 rounded-full px-4 py-3 font-bold mt-2">
+                      <span className="w-3/5">100.000</span>
+                      <span className="w-2/5">Việt Nam Đồng</span>
+                    </div>
+                    <i className="text-sm mx-3">Bằng chữ: Một trăm nghìn đồng</i>
+                  </div>
+                  <div className="text-sm mx-3 mt-4">
+                    Tỉ giá áp dụng: 1 ¥ = 3.730 đ
+                  </div>
+                  <div>
+                    <button className="w-full bg-blue-10 text-white hover:bg-blue-20 rounded-md p-2 mt-4">Tạo yêu cầu thanh toán hộ</button>
+                  </div>
+                </div>
+              }
+              {moVandon &&
+                <div>
+                  <div className="border-b text-xl uppercase py-2">
+                    Tra cứu vận đơn
+                  </div>
+                  <div className="mt-3 text-sm">
+                    Nhập mã vận đơn
+                  </div>
+                  <div className="flex items-center gap-4 mt-2">
+                    <input className="px-4 py-2 w-3/4 border border-black rounded-lg" type="text" placeholder="VD: TAUYHSKJP"></input>
+                    <div className="w-1/4">
+                      <button className="bg-blue-10 hover:bg-blue-20 text-white rounded-md w-full p-2">Tra cứu</button>
+                    </div>
+                  </div>
+                  <div className="mt-5">
+                    <div className="font-semibold">Trạng thái</div>
+                    <table className="mt-4">
+                      <thead>
+                        <tr>
+                          <th>Thời gian</th>
+                          <th>Trạng thái</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="px-4 py-2">20/04/2024</td>
+                          <td className="px-4 py-2">Đơn vị vận chuyển đã lấy hàng</td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-2">21/04/2024</td>
+                          <td className="px-4 py-2">Đã trung chuyển đến kho Thẩm Quyến</td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-2">22/04/2024</td>
+                          <td className="px-4 py-2">Đơn hàng đang được thông quan</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        )}
       </div>
-
+     
       <div
         style={{
           backgroundImage: `url(${values?.banner || "images/banner-home.png"})`,
@@ -70,36 +248,37 @@ const HomePage = ({ values }: typeProps) => {
         className={`min-h-[60vh] h-fit pb-32 pt-[100px] 
          bg-no-repeat bg-center bg-cover`}
       >
+        <div className="uppercase w-fit mx-auto px-2 mt-16 bg-yellow-50 text-red-600 text-center lg:text-3xl text-xl">pay1688 hệ thống - thanh toán - ký gửi - hàng đầu việt nam</div>
         <div className="flex justify-around container w-9/12 pt-20 lg:pt-[117px] gap-10 lg:flex-row flex-col">
-          <div className="py-[28px] px-[41px] rounded-lg bg-glass shadow-glass hover:bg-blue-10">
+          <div className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10">
             <Image
               src={values?.depositVnTq?.logo || ""}
               width={40}
               height={40}
               alt="box"
             />
-            <div className="text-blue-10 font-bold max-w-[293px] text-lg mt-5">
+            <div className="text-white font-bold max-w-[293px] text-lg mt-5">
               {values?.depositVnTq?.title || ""}
             </div>
             <div className="text-white max-w-[319px] mt-4">
               {values?.depositVnTq?.description || ""}
             </div>
-            <BaseButton className="btn-orange mt-5">Bắt đầu ngay</BaseButton>
+            <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
           </div>
-          <div className="py-[28px] px-[41px] rounded-lg bg-glass shadow-glass hover:bg-blue-10 transition-all duration-300">
+          <div className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 transition-all duration-300">
             <Image
               src={values?.depositTqVn?.logo || ""}
               width={40}
               height={40}
               alt="wallet"
             />
-            <div className="text-blue-10 font-bold max-w-[293px] text-lg mt-5">
+            <div className="text-white font-bold max-w-[293px] text-lg mt-5">
               {values?.depositTqVn?.title || ""}
             </div>
             <div className="text-white max-w-[319px] mt-4">
               {values?.depositTqVn?.description || ""}
             </div>
-            <BaseButton className="btn-orange mt-5">Bắt đầu ngay</BaseButton>
+            <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
           </div>
         </div>
       </div>
@@ -114,9 +293,9 @@ const HomePage = ({ values }: typeProps) => {
       <div className="container flex gap-10 flex-col lg:flex-row lg:gap-28 mt-10 lg:mt-[100px]">
         <Image
           src="/images/alipay.jpg"
-          width={562}
+          width={500}
           height={406}
-          className="flex-1 transition-transform rounded-3xl hover:shadow-2xl duration-500 transform-gpu hover:scale-110"
+          className="flex-1 transition-transform hover:shadow-2xl duration-500 transform-gpu hover:scale-110"
           alt="alipay"
         />
         <div className="flex-1">
@@ -126,12 +305,12 @@ const HomePage = ({ values }: typeProps) => {
           <div className="mt-[62px] text-xl">
             {values?.paymentService?.description}
           </div>
-          <div className="mt-[72px] text-center lg:text-left">
-            <BaseButton>
+          <div className="mt-[72px] text-center lg:text-left flex justify-center">
+            <button className="bg-blue-10 hover:bg-blue-20 text-white px-4 py-2">
               <Link href={values?.paymentService?.url || ""}>
                 Tra cứu tỷ giá hôm nay
               </Link>
-            </BaseButton>
+            </button>
           </div>
         </div>
       </div>
@@ -148,61 +327,22 @@ const HomePage = ({ values }: typeProps) => {
           </div>
           <div
             data-aos="fade-up-left"
-            className="lg:text-left text-center mt-7"
+            className="lg:text-left text-center mt-7 flex justify-center"
           >
-            <BaseButton>
+            <button className="bg-blue-10 hover:bg-blue-20 text-white px-4 py-2">
               <Link href={values?.depositService?.url || ""}>Xem thêm</Link>
-            </BaseButton>
+            </button>
           </div>
         </div>
-        <table className="bg-white rounded-lg shadow flex-1 max-w-full">
-          <thead>
-            <tr>
-              {values?.depositService?.tableDeposit?.thead?.map((item, i) => {
-                return (
-                  <th key={i} className="text-center py-4 border-b">
-                    {item.content}
-                  </th>
-                );
-              })}
-            </tr>
-          </thead>
-          <tbody>
-            {values?.depositService?.tableDeposit?.tbody?.map(
-              (item: any, i) => {
-                return (
-                  <tr key={i}>
-                    {values?.depositService?.tableDeposit?.thead?.map(
-                      (value, i) => {
-                        return (
-                          <td className="text-center py-4">
-                            {item[value?.content as any]}
-                          </td>
-                        );
-                      }
-                    )}
-                  </tr>
-                );
-              }
-            )}
-
-            <tr>
-              {values?.depositService?.tableDeposit?.thead?.map((value, i) => {
-                if (value?.url) {
-                  return (
-                    <td className="text-center py-4">
-                      <BaseButton className="btn-blue">
-                        Tạo đơn đặt hàng
-                      </BaseButton>
-                    </td>
-                  );
-                } else {
-                  return <td className="text-center py-4"></td>;
-                }
-              })}
-            </tr>
-          </tbody>
-        </table>
+        <div>
+          <Image
+            src="/images/banggia.PNG"
+            width={562}
+            height={406}
+            className="w-full object-contain"
+            alt="bang gia"
+          />
+        </div>
       </div>
 
       <div className="container flex mt-12 lg:flex-row flex-col gap-10">
@@ -226,7 +366,7 @@ const HomePage = ({ values }: typeProps) => {
         </div>
       </div>
 
-      <div className="container mt-10 lg:mt-[100px] flex items-center lg:flex-row flex-col gap-10">
+      <div className="container mt-10 lg:mt-[100px] flex lg:flex-row flex-col gap-10">
         <div className="flex-1 flex justify-center relative">
           <img
             // data-aos="fade-up"

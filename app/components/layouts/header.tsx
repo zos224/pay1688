@@ -12,29 +12,29 @@ export default function Header({ logo }: { logo?: any }) {
   const router = useRouter();
   const [items, setItems] = React.useState([
     {
-      label: "Giới thiệu",
+      label: "GIỚI THIỆU",
       key: "/",
     },
     {
-      label: "Dịch vụ",
+      label: "DỊCH VỤ",
       key: "/service",
       // children: [],
     },
     {
-      label: "Biểu phí",
+      label: "BIỂU PHÍ",
       key: "/pricing",
     },
     {
-      label: "Chính sách",
+      label: "CHÍNH SÁCH",
       key: "/policy",
       // children: [],
     },
     {
-      label: "Hướng dẫn",
+      label: "HƯỚNG DẪN",
       key: "/tutorial",
     },
     {
-      label: "Blog",
+      label: "BLOG",
       key: "/blog",
     },
   ]);

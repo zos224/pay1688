@@ -1,3 +1,4 @@
+import { height } from "@fortawesome/free-brands-svg-icons/faFacebook";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -37,6 +38,12 @@ const config: Config = {
           "5": "#6E6E73",
           "10": "#666C89"
         }
+      },
+      width: {
+        100: "400px"
+      },
+      height: {
+        100: "350px"
       }
     },
   },
