@@ -1,0 +1,71 @@
+.ant-modal-footer button:nth-of-type(2) {
+  background-color: #7099eb !important;
+
+}
+
+
+.news-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-title {
+  height: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.news-title-t {
+  display: flex;
+  flex-direction: column;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.news-title-t span {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.rq-table-pagination-item {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.rq-table-pagination-checked {
+  background-color: rgb(211, 211, 211) !important;
+  border-radius: 9px;
+}
+
+.rq-table-pagination-item:hover {
+  background-color: rgb(218, 218, 218) !important;
+  border-radius: 9px;
+}
+
+.rq-table-pagination {
+  padding: 20px 20px 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.news-list {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 60px 40px;
+}
+
+.ant-menu-submenu-disabled {
+  pointer-events: auto !important;
+  position: static !important;
+
+}

@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.bg-glass {
+  --glass: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  background: var(--glass);
+  backdrop-filter: blur(15px);
+}
+
+.shadow-glass {
+  box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.05);
+}
+
+.btn-orange {
+  @apply rounded-full text-white bg-orange-5 border-none hover:bg-orange-10 whitespace-nowrap w-fit font-semibold;
+}
+.btn-blue {
+  @apply rounded-full text-white bg-blue-10 border-none hover:bg-blue-10;
+}
+.title {
+  @apply text-3xl text-blue-10 lg:text-5xl font-semibold;
+}
+
+.modal-contact .ant-modal-body {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.ant-menu-sub .ant-menu-item-only-child {
+  color: black !important;
+}
