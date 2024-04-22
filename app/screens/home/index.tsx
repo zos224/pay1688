@@ -336,7 +336,7 @@ const HomePage = ({ values }: typeProps) => {
         </div>
         <div>
           <Image
-            src="/images/banggia.PNG"
+            src="/images/banggia.png"
             width={562}
             height={406}
             className="w-full object-contain"
