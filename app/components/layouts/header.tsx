@@ -5,11 +5,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import api from "@/api/graphql";
+import { get } from "http";
 
 export default function Header({ logo }: { logo?: any }) {
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState("mail");
   const router = useRouter();
+  const [urlLogin, setUrlLogin] = React.useState("" as string);
+  const [urlRegister, setUrlRegister] = React.useState("" as string);
   const [items, setItems] = React.useState([
     {
       label: "GIỚI THIỆU",
@@ -101,14 +104,23 @@ export default function Header({ logo }: { logo?: any }) {
     } catch (error) {}
   };
 
+  const getUrl = async () => {
+    try {
+      const { data } = await api.apiGetSetting({});
+      setUrlLogin(data?.data?.content?.home?.urlDangNhap || "");
+      setUrlRegister(data?.data?.content?.home?.urlDangKy || "");
+    } catch (error) {}
+  }
+
   React.useEffect(() => {
     getNewsP();
     getNewsC();
+    getUrl();
   }, []);
 
   return (
     <header className="bg-blue-10 text-white fixed top-0 right-0 left-0 bg-opacity-50 z-20">
-      <div className="container h-[68px] flex items-center justify-between">
+      <div className="container h-[75px] flex items-center justify-between">
         <div className="block lg:hidden">
           <FontAwesomeIcon
             icon={faBars}
@@ -144,7 +156,7 @@ export default function Header({ logo }: { logo?: any }) {
                 alt="logo"
                 width={50}
                 height={50}
-                style={{ height: "50px", width: "auto" }}
+                style={{ height: "60px", width: "auto" }}
               />
             </a>
           </Link>
@@ -171,10 +183,16 @@ export default function Header({ logo }: { logo?: any }) {
           </ConfigProvider>
         </div>
 
-        <Link href="/login">
+        <Link href={urlLogin}>
           <Button className="btn-orange flex items-center gap-2 text-[14px] h-[35px]">
             <FontAwesomeIcon icon={faUser} className="size-3" />
             Đăng nhập
+          </Button>
+        </Link>
+        <Link href={urlRegister}>
+          <Button className="btn-orange flex items-center gap-2 text-[14px] h-[35px]">
+            <FontAwesomeIcon icon={faUser} className="size-3" />
+            Đăng ký
           </Button>
         </Link>
       </div>

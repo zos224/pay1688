@@ -267,8 +267,8 @@ const HomePage = ({ values }: typeProps) => {
         className={`min-h-[60vh] h-fit pb-32 pt-[100px] 
          bg-no-repeat bg-center bg-cover`}
       >
-        <div data-aos="zoom-in-up" data-aos-duration="500" className="uppercase w-fit mx-auto px-2 mt-16 font-semibold text-blue-10 text-center lg:text-3xl text-xl">pay1688 hệ thống - thanh toán - ký gửi - hàng đầu việt nam</div>
-        <div className="flex justify-around container w-9/12 pt-20 lg:pt-[117px] gap-10 lg:flex-row flex-col">
+        <div data-aos="zoom-in-up" data-aos-duration="500" className="uppercase w-fit mx-auto px-2 mt-16 font-semibold text-blue-10 text-center lg:text-3xl text-xl">hệ thống - thanh toán - ký gửi hàng - trung quốc - việt nam</div>
+        <div className="flex justify-around container w-10/12 pt-20 lg:pt-[117px] gap-16 lg:flex-row flex-col">
           <div data-aos="fade-right" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20">
             <Image
               src={values?.depositVnTq?.logo || ""}
@@ -284,7 +284,7 @@ const HomePage = ({ values }: typeProps) => {
             </div>
             <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
           </div>
-          <div data-aos="fade-left" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20 transition-all duration-300">
+          <div data-aos="zoom-in" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20 transition-all duration-300">
             <Image
               src={values?.depositTqVn?.logo || ""}
               width={40}
@@ -296,6 +296,21 @@ const HomePage = ({ values }: typeProps) => {
             </div>
             <div className="text-white max-w-[319px] mt-4">
               {values?.depositTqVn?.description || ""}
+            </div>
+            <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
+          </div>
+          <div data-aos="fade-left" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20 transition-all duration-300">
+            <Image
+              src={values?.nhapKhauChinhNgach?.logo || ""}
+              width={40}
+              height={40}
+              alt="wallet"
+            />
+            <div className="text-white font-bold max-w-[293px] text-lg mt-5">
+              {values?.nhapKhauChinhNgach?.title || ""}
+            </div>
+            <div className="text-white max-w-[319px] mt-4">
+              {values?.nhapKhauChinhNgach?.description || ""}
             </div>
             <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
           </div>

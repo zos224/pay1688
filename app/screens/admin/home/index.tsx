@@ -181,6 +181,17 @@ const HomePage = ({ setting }: typeProps) => {
           <Input placeholder="Nhập ..." />
         </Form.Item>
 
+        <div className="font-[500] mt-4">Url Đăng nhập</div>
+        <Form.Item name={"urlDangNhap"}>
+          <Input placeholder="Nhập ..." />
+        </Form.Item>
+
+
+        <div className="font-[500] mt-4">Url Đăng ký</div>
+        <Form.Item name={"urlDangKy"}>
+          <Input placeholder="Nhập ..." />
+        </Form.Item>
+
         <div className="mt-3 shadow-lg py-2 px-2">
           <div className="font-[500] my-4">Kí gửi hảng TQ - VN</div>
 
@@ -235,6 +246,35 @@ const HomePage = ({ setting }: typeProps) => {
             <Input.TextArea rows={6} placeholder="Mô tả ..." />
           </Form.Item>
           <Form.Item name={["depositVnTq", "url"]}>
+            <Input placeholder="Đường dẫn ..." />
+          </Form.Item>
+        </div>
+
+        {/* Nhập khẩu chính ngạch */}
+        <div className="mt-3 shadow-lg py-2 px-2">
+          <div className="font-[500] my-4">Nhập khẩu chính ngạch</div>
+
+          <Form.Item name={["nhapKhauChinhNgach", "logo"]} className="mt-2">
+            <Upload
+              listType="picture"
+              defaultFileList={renderValue(home?.nhapKhauChinhNgach?.logo, [
+                {
+                  url: home?.nhapKhauChinhNgach?.logo,
+                  name: home?.nhapKhauChinhNgach?.logo,
+                },
+              ])}
+            >
+              <Button>Chọn logo</Button>
+            </Upload>
+          </Form.Item>
+
+          <Form.Item name={["nhapKhauChinhNgach", "title"]}>
+            <Input placeholder="Tiêu đề ..." />
+          </Form.Item>
+          <Form.Item name={["nhapKhauChinhNgach", "description"]}>
+            <Input.TextArea rows={6} placeholder="Mô tả ..." />
+          </Form.Item>
+          <Form.Item name={["nhapKhauChinhNgach", "url"]}>
             <Input placeholder="Đường dẫn ..." />
           </Form.Item>
         </div>

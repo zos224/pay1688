@@ -23,7 +23,13 @@ const useSettings = () => {
                 title: undefined,
                 description: undefined,
                 url: undefined
-            }
+            },
+            nhapKhauChinhNgach: {
+                logo: undefined,
+                title: undefined,
+                description: undefined,
+                url: undefined
+            },
         },
         service: {
             orderShip: []
@@ -89,6 +95,20 @@ const useSettings = () => {
                     if (asValueTypeAny(params?.depositTqVn?.logo)?.file?.status === "removed") {
                         if (params?.depositTqVn) {
                             params.depositTqVn.logo = "";
+                        }
+                    }
+                }
+            }
+
+            if (asValueTypeAny(params?.nhapKhauChinhNgach?.logo)?.file) {
+                if (asValueTypeAny(params?.nhapKhauChinhNgach?.logo)?.file?.originFileObj) {
+                    if (params?.nhapKhauChinhNgach) {
+                        params.nhapKhauChinhNgach.logo = await imagesRenderUrl(asValueTypeAny(params?.nhapKhauChinhNgach?.logo)?.file?.originFileObj)
+                    }
+                } else {
+                    if (asValueTypeAny(params?.nhapKhauChinhNgach?.logo)?.file?.status === "removed") {
+                        if (params?.nhapKhauChinhNgach) {
+                            params.nhapKhauChinhNgach.logo = "";
                         }
                     }
                 }

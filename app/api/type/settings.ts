@@ -24,6 +24,14 @@ export interface typeHomePage {
         description?: string
         url?: string
     }
+    nhapKhauChinhNgach: {
+        logo?: string
+        title?: string
+        description?: string
+        url?: string
+    }
+    urlDangNhap?: string
+    urlDangKy?: string
     calculateShippingChargeUrl?: string
     lookUpThePriceUrl?: string
     lookUpBillUrl?: string
