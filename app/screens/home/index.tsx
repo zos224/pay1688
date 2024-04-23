@@ -1,5 +1,5 @@
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
-import { faChevronRight, faTruck, faWallet } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faChevronRight, faTruck, faWallet } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import BaseButton from "@/components/common/BaseButton";
@@ -63,20 +63,23 @@ const HomePage = ({ values }: typeProps) => {
       <div className="z-10 fixed top-[180px]  right-0">
         {!moTigia && !moTinhCuoc && !moVandon ? 
         (
-        <div className=" flex flex-col items-end w-52 gap-3 text-blue-10">
-          <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="group h-10 rounded-l-full p-5 bg-gray-3 translate-x-3/4 hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
+        <div className=" flex flex-col items-end gap-3 ">
+          <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="group h-10 rounded-tl-xl px-3.5 py-6 bg-blue-10 text-white flex items-center">
+            <FontAwesomeIcon icon={faChevronLeft} className="size-6" />
+          </button>
+          <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="group h-10 px-3 py-6 bg-blue-10 text-white translate-x-[75%] hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
             <FontAwesomeIcon icon={faWallet} className="size-6" />
-            <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap">
+            <span className="opacity-0 group-hover:opacity-100">
               Tính cước vận chuyển
             </span>
           </button>
-          <button onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}} className="group h-10 rounded-l-full p-5 bg-gray-3 translate-x-2/3 hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
+          <button onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}} className="group h-10 px-3 py-6 bg-blue-10 text-white translate-x-[64%] hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
             <FontAwesomeIcon icon={faUsd} className="size-6" />
             <span className="opacity-0 group-hover:opacity-100 ">
               Tra cứu tỉ giá
             </span>
           </button>
-          <button onClick={() => {setMoVandon(true); setMoTigia(false); setMoTinhCuoc(false)}} className="group h-10 rounded-l-full p-5 bg-gray-3 translate-x-[71%] hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
+          <button onClick={() => {setMoVandon(true); setMoTigia(false); setMoTinhCuoc(false)}} className="group h-10 rounded-bl-xl px-3 py-6 bg-blue-10 text-white translate-x-[70%] hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
             <FontAwesomeIcon icon={faTruck} className="size-6" />
             <span className="opacity-0 group-hover:opacity-100 ">
               Tra cứu vận đơn
@@ -85,24 +88,24 @@ const HomePage = ({ values }: typeProps) => {
         </div> 
         ) : (
           <div ref={modalRef} onAnimationEnd={handleAnimationEnd} className="flex flex-col items-end animate-right-to-left">
-            <div className="flex w-fit items-center bg-gray-5 rounded-tl-xl">
-              <div className={`px-5 rounded-tl-xl py-3 cursor-pointer ${moTinhCuoc ? "bg-white" : "text-white"}`} onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}}>
+            <div className="flex w-fit items-center bg-blue-10 rounded-tl-xl">
+              <div className={`px-5 rounded-tl-xl py-3 cursor-pointer ${moTinhCuoc ? "bg-blue-5 text-blue-10" : "text-white"}`} onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}}>
                 <FontAwesomeIcon icon={faWallet} className="size-6" />
               </div>
-              <div className={`px-5 py-3 cursor-pointer ${moTigia ? "bg-white" : "text-white"}`} onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}}>
+              <div className={`px-5 py-3 cursor-pointer ${moTigia ? "bg-blue-5 text-blue-10" : "text-white"}`} onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}}>
                 <FontAwesomeIcon icon={faUsd} className="size-6" />
               </div>
-              <div className={`px-5 py-3 cursor-pointer ${moVandon ? "bg-white" : "text-white"}`} onClick={() => {setMoVandon(true); setMoTigia(false); setMoTinhCuoc(false)}}>
+              <div className={`px-5 py-3 cursor-pointer ${moVandon ? "bg-blue-5 text-blue-10" : "text-white"}`} onClick={() => {setMoVandon(true); setMoTigia(false); setMoTinhCuoc(false)}}>
                 <FontAwesomeIcon icon={faTruck} className="size-6" />
               </div>
               <div className={`px-5 py-3 cursor-pointer text-white`} onClick={closeModal}>
                 <FontAwesomeIcon icon={faChevronRight} className="size-6"/>
               </div>
             </div>
-            <div className="w-100 bg-white p-3 rounded-l-md max-h-96 overflow-auto">
+            <div className="max-w-100 bg-blue-5 p-3 rounded-l-md max-h-96 overflow-auto">
               {moTinhCuoc && 
                 <div>
-                  <div className="border-b text-xl uppercase py-2">
+                  <div className="border-b text-xl font-semibold uppercase py-2 text-blue-10">
                     Tính cước vận chuyển TQ-VN
                   </div>
                   <div className="flex gap-2 text-sm mt-3">
@@ -165,7 +168,7 @@ const HomePage = ({ values }: typeProps) => {
                     </div>
                   </div>
                   <div className="pt-5 border-t border-black">
-                      <label>Giá trị vận chuyển ước tính</label>
+                      <label className="text-blue-10 font-semibold">Giá trị vận chuyển ước tính</label>
                       <div className="flex items-center w-full bg-gray-3 rounded-full px-4 font-bold mt-2">
                         <input className="border-none outline-none p-2 w-full bg-gray-3 rounded-full" type="text" placeholder="0.00"></input>
                         <span>vnđ</span>
@@ -179,7 +182,7 @@ const HomePage = ({ values }: typeProps) => {
               }
               {moTigia &&
                 <div>
-                  <div className="border-b text-xl uppercase py-2">
+                  <div className="border-b text-xl uppercase py-2 font-semibold text-blue-10">
                     Tra cứu tỉ giá
                   </div>
                   <div className="mt-4">
@@ -196,7 +199,7 @@ const HomePage = ({ values }: typeProps) => {
                     <i className="text-sm">Số tệ càng nhiều, Pay1688 sẽ áp dụng tỉ giá càng thấp</i>
                   </div>
                   <div className="mt-6">
-                    <div className="font-semibold">Kết quả quy đổi</div>
+                    <div className="font-semibold text-blue-10">Kết quả quy đổi</div>
                     <div className="flex items-center w-full bg-gray-3 rounded-full px-4 py-3 font-bold mt-2">
                       <span className="w-3/5">100.000</span>
                       <span className="w-2/5">Việt Nam Đồng</span>
@@ -213,7 +216,7 @@ const HomePage = ({ values }: typeProps) => {
               }
               {moVandon &&
                 <div>
-                  <div className="border-b text-xl uppercase py-2">
+                  <div className="border-b text-xl uppercase py-2 font-semibold text-blue-10">
                     Tra cứu vận đơn
                   </div>
                   <div className="mt-3 text-sm">
@@ -226,7 +229,7 @@ const HomePage = ({ values }: typeProps) => {
                     </div>
                   </div>
                   <div className="mt-5">
-                    <div className="font-semibold">Trạng thái</div>
+                    <div className="font-semibold text-blue-10">Trạng thái</div>
                     <table className="mt-4">
                       <thead>
                         <tr>

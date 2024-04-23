@@ -26,6 +26,7 @@ const config: Config = {
       },
       colors: {
         blue: {
+          "5": "#cfd9e1",
           "10": "#12416B",
           "20": "#0B2B47"
         },
@@ -39,7 +40,7 @@ const config: Config = {
           "10": "#666C89"
         }
       },
-      width: {
+      maxWidth: {
         100: "400px"
       },
       keyframes: {

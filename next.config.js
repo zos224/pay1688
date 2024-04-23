@@ -21,6 +21,7 @@ const nextConfig = {
         hostname: "**",
       },
     ],
+    unoptimized: true
   },
   transpilePackages: ["antd", "@ant-design", "@babel"],
 };
