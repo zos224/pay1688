@@ -360,99 +360,19 @@ const HomePage = ({ setting }: typeProps) => {
           <Form.Item name={["depositService", "url"]}>
             <Input placeholder="Đường dẫn ..." />
           </Form.Item>
-
-          <div className="font-[500] mt-4">Bảng thông tin</div>
-          <div className="my-[50px]">
-            <div className="font-[400] mt-4">Tên cột</div>
-            <Form.List name={["depositService", "tableDeposit", "thead"]}>
-              {(fields: any[], { add, remove }: any) => (
-                <div>
-                  {fields.map((field, index) => (
-                    <div className=" py-[15px] mb-1" key={index}>
-                      <Form.Item name={[index, "content"]}>
-                        <Input placeholder="nhập" />
-                      </Form.Item>
-                      <Form.Item name={[index, "url"]}>
-                        <Input placeholder="nhập đường dẫn" />
-                      </Form.Item>
-                      <Button
-                        onClick={() => remove(index)}
-                        className="!bg-[red] !text-white"
-                        type="dashed"
-                      >
-                        Xóa
-                      </Button>
-                    </div>
-                  ))}
-                  <Form.Item>
-                    <Button onClick={() => add()} style={{ width: "60%" }}>
-                      Thêm
-                    </Button>
-                  </Form.Item>
-                </div>
-              )}
-            </Form.List>
-            <div className="font-[400] mt-4">Nội dung cột</div>
-            <Form.List name={["depositService", "tableDeposit", "tbody"]}>
-              {(fields: any[], { add, remove }: any) => (
-                <div>
-                  {fields.map((field, index) => (
-                    <div className=" py-[15px] mb-1" key={index}>
-                      {form.getFieldValue("depositService")["tableDeposit"][
-                        "thead"
-                      ] &&
-                        form
-                          .getFieldValue("depositService")
-                          ["tableDeposit"]["thead"]?.map(
-                            (item: any, i: number) => {
-                              return (
-                                <div className="p-3">
-                                  <div>{item?.content}</div>
-                                  <Form.Item
-                                    key={i}
-                                    name={[index, item?.content]}
-                                  >
-                                    <Input.TextArea
-                                      rows={5}
-                                      placeholder="Nhập"
-                                    />
-                                  </Form.Item>
-                                </div>
-                              );
-                            }
-                          )}
-
-                      <Button
-                        onClick={() => remove(index)}
-                        className="!bg-[red] !text-white"
-                        type="dashed"
-                      >
-                        Xóa
-                      </Button>
-                    </div>
-                  ))}
-                  <Form.Item>
-                    <Button
-                      onClick={() => {
-                        const { tableDeposit } =
-                          form.getFieldValue("depositService");
-
-                        console.log("tableDeposit", tableDeposit);
-                        if (tableDeposit?.thead?.length) {
-                          add();
-                        } else {
-                          message.error("Bạn cần thêm tên cột");
-                        }
-                      }}
-                      style={{ width: "60%" }}
-                    >
-                      Thêm
-                    </Button>
-                  </Form.Item>
-                </div>
-              )}
-            </Form.List>
-          </div>
+          <Form.Item name={["depositService", "image"]} className="mt-2">
+            <Upload
+              listType="picture"
+              defaultFileList={renderValue(home?.depositService?.image, [
+                {
+                  name: home?.depositService?.image,
+                  url: home?.depositService?.image,
+                },
+              ])}
+            >
+              <Button>Chọn ảnh nền</Button>
+            </Upload>
+          </Form.Item>
         </div>
 
         <div className="my-[50px]">

@@ -183,18 +183,20 @@ export default function Header({ logo }: { logo?: any }) {
           </ConfigProvider>
         </div>
 
-        <Link href={urlLogin}>
-          <Button className="btn-orange flex items-center gap-2 text-[14px] h-[35px]">
-            <FontAwesomeIcon icon={faUser} className="size-3" />
-            Đăng nhập
-          </Button>
-        </Link>
-        <Link href={urlRegister}>
-          <Button className="btn-orange flex items-center gap-2 text-[14px] h-[35px]">
-            <FontAwesomeIcon icon={faUser} className="size-3" />
-            Đăng ký
-          </Button>
-        </Link>
+        <div className="flex gap-3 items-stretch">
+          <Link href={urlRegister}>
+            <Button className="btn-orange flex items-center gap-2 text-[14px] h-[35px]">
+              <FontAwesomeIcon icon={faUser} className="size-3" />
+              Đăng ký
+            </Button>
+          </Link>
+          <Link href={urlLogin}>
+            <Button className="btn-orange flex items-center gap-2 text-[14px] h-[35px]">
+              <FontAwesomeIcon icon={faUser} className="size-3" />
+              Đăng nhập
+            </Button>
+          </Link>
+        </div>
       </div>
     </header>
   );

@@ -44,15 +44,7 @@ export interface typeHomePage {
     depositService?: {
         description?: string
         url?: string
-        tableDeposit?: {
-            thead?: {
-                content?: string
-                url?: string
-            }[]
-            tbody?: {
-                content?: string
-            }[]
-        }
+        image?: string
     }
 
     depositProcess?: {

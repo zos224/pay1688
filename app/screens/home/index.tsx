@@ -67,16 +67,16 @@ const HomePage = ({ values }: typeProps) => {
           <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="group h-10 rounded-tl-xl px-3.5 py-6 bg-blue-10 text-white flex items-center">
             <FontAwesomeIcon icon={faChevronLeft} className="size-6" />
           </button>
-          <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="group h-10 px-3 py-6 bg-blue-10 text-white translate-x-[75%] hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
-            <FontAwesomeIcon icon={faWallet} className="size-6" />
-            <span className="opacity-0 group-hover:opacity-100">
-              Tính cước vận chuyển
-            </span>
-          </button>
           <button onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}} className="group h-10 px-3 py-6 bg-blue-10 text-white translate-x-[64%] hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
             <FontAwesomeIcon icon={faUsd} className="size-6" />
             <span className="opacity-0 group-hover:opacity-100 ">
               Tra cứu tỉ giá
+            </span>
+          </button>
+          <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="group h-10 px-3 py-6 bg-blue-10 text-white translate-x-[75%] hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
+            <FontAwesomeIcon icon={faWallet} className="size-6" />
+            <span className="opacity-0 group-hover:opacity-100">
+              Tính cước vận chuyển
             </span>
           </button>
           <button onClick={() => {setMoVandon(true); setMoTigia(false); setMoTinhCuoc(false)}} className="group h-10 rounded-bl-xl px-3 py-6 bg-blue-10 text-white translate-x-[70%] hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
@@ -89,11 +89,11 @@ const HomePage = ({ values }: typeProps) => {
         ) : (
           <div ref={modalRef} onAnimationEnd={handleAnimationEnd} className="flex flex-col items-end animate-right-to-left">
             <div className="flex w-fit items-center bg-blue-10 rounded-tl-xl">
-              <div className={`px-5 rounded-tl-xl py-3 cursor-pointer ${moTinhCuoc ? "bg-blue-5 text-blue-10" : "text-white"}`} onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}}>
-                <FontAwesomeIcon icon={faWallet} className="size-6" />
-              </div>
-              <div className={`px-5 py-3 cursor-pointer ${moTigia ? "bg-blue-5 text-blue-10" : "text-white"}`} onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}}>
+              <div className={`px-5 py-3 rounded-tl-xl cursor-pointer ${moTigia ? "bg-blue-5 text-blue-10" : "text-white"}`} onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}}>
                 <FontAwesomeIcon icon={faUsd} className="size-6" />
+              </div>
+              <div className={`px-5  py-3 cursor-pointer ${moTinhCuoc ? "bg-blue-5 text-blue-10" : "text-white"}`} onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}}>
+                <FontAwesomeIcon icon={faWallet} className="size-6" />
               </div>
               <div className={`px-5 py-3 cursor-pointer ${moVandon ? "bg-blue-5 text-blue-10" : "text-white"}`} onClick={() => {setMoVandon(true); setMoTigia(false); setMoTinhCuoc(false)}}>
                 <FontAwesomeIcon icon={faTruck} className="size-6" />
@@ -268,9 +268,9 @@ const HomePage = ({ values }: typeProps) => {
          bg-no-repeat bg-center bg-cover`}
       >
         <div data-aos="zoom-in-up" data-aos-duration="500" className="uppercase w-fit mx-auto px-2 mt-16 font-semibold text-blue-10 text-center lg:text-3xl text-xl">hệ thống - thanh toán - ký gửi hàng - trung quốc - việt nam</div>
-        <div className="flex justify-between container  pt-20 lg:pt-[117px] gap-16 lg:flex-row flex-col">
-          <div className="hover:scale-110 transition-all duration-300">
-            <div data-aos="fade-right" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20  duration-200 hover:border-2 hover:border-orange-10 hover:shadow-lg hover:shadow-orange-10">
+        <div className="flex justify-between container  pt-20 lg:pt-[117px] gap-16 lg:flex-row flex-col items-stretch">
+          <div className="hover:scale-110 transition-all duration-300 flex flex-1 mx-auto">
+            <div data-aos="fade-right" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20  duration-200 hover:border-4 hover:border-blue-5 hover:shadow-lg hover:shadow-blue-5 ">
               <Image
                 src={values?.depositVnTq?.logo || ""}
                 width={40}
@@ -286,8 +286,8 @@ const HomePage = ({ values }: typeProps) => {
               <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
             </div>
           </div>
-          <div className="hover:scale-110 transition-all duration-300"> 
-            <div data-aos="zoom-in" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20 hover:scale-110 transition-all duration-300 hover:border-2 hover:border-orange-10 hover:shadow-lg hover:shadow-orange-10">
+          <div className="hover:scale-110 transition-all duration-300 flex flex-1 mx-auto"> 
+            <div data-aos="zoom-in" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20  transition-all duration-300 hover:border-4 hover:border-blue-5 hover:shadow-lg hover:shadow-blue-5 ">
               <Image
                 src={values?.depositTqVn?.logo || ""}
                 width={40}
@@ -303,8 +303,8 @@ const HomePage = ({ values }: typeProps) => {
               <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
             </div>
           </div>
-          <div className="hover:scale-110 transition-all duration-300">
-            <div data-aos="fade-left" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20 hover:border-2 hover:border-orange-10 hover:shadow-lg hover:shadow-orange-10 transition-all duration-300">
+          <div className="hover:scale-110 transition-all duration-300 flex flex-1 mx-auto">
+            <div data-aos="fade-left" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20 hover:border-4 hover:border-blue-5 hover:shadow-lg hover:shadow-blue-5 transition-all duration-300">
               <Image
                 src={values?.nhapKhauChinhNgach?.logo || ""}
                 width={40}
@@ -332,7 +332,7 @@ const HomePage = ({ values }: typeProps) => {
 
       <div className="container flex gap-10 flex-col lg:flex-row lg:gap-28 mt-10 lg:mt-[100px]">
         <Image
-          src="/images/alipay.jpg"
+          src={values?.paymentService?.banner || "/images/alipay.png"}
           width={500}
           height={406}
           className="flex-1 transition-transform hover:shadow-2xl duration-500 transform-gpu hover:scale-110"
@@ -376,7 +376,7 @@ const HomePage = ({ values }: typeProps) => {
         </div>
         <div>
           <Image
-            src="/images/banggia.PNG"
+            src={values?.depositService?.image || "/images/bang-gia.png"}
             width={562}
             height={406}
             className="w-full object-contain"

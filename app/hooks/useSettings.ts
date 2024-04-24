@@ -147,6 +147,19 @@ const useSettings = () => {
                 }
             }
 
+            if (asValueTypeAny(params?.depositService?.image)?.file) {
+                if (asValueTypeAny(params?.depositService?.image)?.file?.originFileObj) {
+                    if (params?.depositService) {
+                        params.depositService.image = await imagesRenderUrl(asValueTypeAny(params?.depositService?.image)?.file?.originFileObj)
+                    }
+                } else {
+                    if (asValueTypeAny(params?.depositService?.image)?.file?.status === "removed") {
+                        if (params?.depositService) {
+                            params.depositService.image = "";
+                        }
+                    }
+                }
+            }
 
             //
             if (asValueTypeAny(params?.financialManagement?.banner)?.file) {
