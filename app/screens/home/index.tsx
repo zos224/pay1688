@@ -268,9 +268,9 @@ const HomePage = ({ values }: typeProps) => {
          bg-no-repeat bg-center bg-cover`}
       >
         <div data-aos="zoom-in-up" data-aos-duration="500" className="uppercase w-fit mx-auto px-2 mt-16 font-semibold text-blue-10 text-center lg:text-3xl text-xl">hệ thống - thanh toán - ký gửi hàng - trung quốc - việt nam</div>
-        <div className="flex justify-around container w-10/12 pt-20 lg:pt-[117px] gap-16 lg:flex-row flex-col">
-          <div data-aos="fade-right" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20  duration-200">
-            <div className="hover:scale-105 duration-200">
+        <div className="flex justify-between container  pt-20 lg:pt-[117px] gap-16 lg:flex-row flex-col">
+          <div className="hover:scale-110 transition-all duration-300">
+            <div data-aos="fade-right" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20  duration-200 hover:border-2 hover:border-orange-10 hover:shadow-lg hover:shadow-orange-10">
               <Image
                 src={values?.depositVnTq?.logo || ""}
                 width={40}
@@ -286,8 +286,8 @@ const HomePage = ({ values }: typeProps) => {
               <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
             </div>
           </div>
-          <div data-aos="zoom-in" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20 hover:scale-110 transition-all duration-300">
-            <div className="hover:scale-105 duration-200">
+          <div className="hover:scale-110 transition-all duration-300"> 
+            <div data-aos="zoom-in" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20 hover:scale-110 transition-all duration-300 hover:border-2 hover:border-orange-10 hover:shadow-lg hover:shadow-orange-10">
               <Image
                 src={values?.depositTqVn?.logo || ""}
                 width={40}
@@ -303,8 +303,8 @@ const HomePage = ({ values }: typeProps) => {
               <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
             </div>
           </div>
-          <div data-aos="fade-left" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20 transition-all duration-300">
-            <div className="hover:scale-105 duration-200">
+          <div className="hover:scale-110 transition-all duration-300">
+            <div data-aos="fade-left" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20 hover:border-2 hover:border-orange-10 hover:shadow-lg hover:shadow-orange-10 transition-all duration-300">
               <Image
                 src={values?.nhapKhauChinhNgach?.logo || ""}
                 width={40}
