@@ -269,50 +269,56 @@ const HomePage = ({ values }: typeProps) => {
       >
         <div data-aos="zoom-in-up" data-aos-duration="500" className="uppercase w-fit mx-auto px-2 mt-16 font-semibold text-blue-10 text-center lg:text-3xl text-xl">hệ thống - thanh toán - ký gửi hàng - trung quốc - việt nam</div>
         <div className="flex justify-around container w-10/12 pt-20 lg:pt-[117px] gap-16 lg:flex-row flex-col">
-          <div data-aos="fade-right" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20">
-            <Image
-              src={values?.depositVnTq?.logo || ""}
-              width={40}
-              height={40}
-              alt="box"
-            />
-            <div className="text-white font-bold max-w-[293px] text-lg mt-5">
-              {values?.depositVnTq?.title || ""}
+          <div data-aos="fade-right" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20  duration-200">
+            <div className="hover:scale-105 duration-200">
+              <Image
+                src={values?.depositVnTq?.logo || ""}
+                width={40}
+                height={40}
+                alt="box"
+              />
+              <div className="text-white font-bold max-w-[293px] text-lg mt-5">
+                {values?.depositVnTq?.title || ""}
+              </div>
+              <div className="text-white max-w-[319px] mt-4">
+                {values?.depositVnTq?.description || ""}
+              </div>
+              <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
             </div>
-            <div className="text-white max-w-[319px] mt-4">
-              {values?.depositVnTq?.description || ""}
-            </div>
-            <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
           </div>
-          <div data-aos="zoom-in" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20 transition-all duration-300">
-            <Image
-              src={values?.depositTqVn?.logo || ""}
-              width={40}
-              height={40}
-              alt="wallet"
-            />
-            <div className="text-white font-bold max-w-[293px] text-lg mt-5">
-              {values?.depositTqVn?.title || ""}
+          <div data-aos="zoom-in" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20 hover:scale-110 transition-all duration-300">
+            <div className="hover:scale-105 duration-200">
+              <Image
+                src={values?.depositTqVn?.logo || ""}
+                width={40}
+                height={40}
+                alt="wallet"
+              />
+              <div className="text-white font-bold max-w-[293px] text-lg mt-5">
+                {values?.depositTqVn?.title || ""}
+              </div>
+              <div className="text-white max-w-[319px] mt-4">
+                {values?.depositTqVn?.description || ""}
+              </div>
+              <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
             </div>
-            <div className="text-white max-w-[319px] mt-4">
-              {values?.depositTqVn?.description || ""}
-            </div>
-            <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
           </div>
           <div data-aos="fade-left" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20 transition-all duration-300">
-            <Image
-              src={values?.nhapKhauChinhNgach?.logo || ""}
-              width={40}
-              height={40}
-              alt="wallet"
-            />
-            <div className="text-white font-bold max-w-[293px] text-lg mt-5">
-              {values?.nhapKhauChinhNgach?.title || ""}
+            <div className="hover:scale-105 duration-200">
+              <Image
+                src={values?.nhapKhauChinhNgach?.logo || ""}
+                width={40}
+                height={40}
+                alt="wallet"
+              />
+              <div className="text-white font-bold max-w-[293px] text-lg mt-5">
+                {values?.nhapKhauChinhNgach?.title || ""}
+              </div>
+              <div className="text-white max-w-[319px] mt-4">
+                {values?.nhapKhauChinhNgach?.description || ""}
+              </div>
+              <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
             </div>
-            <div className="text-white max-w-[319px] mt-4">
-              {values?.nhapKhauChinhNgach?.description || ""}
-            </div>
-            <button className="btn-orange px-4 py-2 mt-5">Bắt đầu ngay</button>
           </div>
         </div>
       </div>
