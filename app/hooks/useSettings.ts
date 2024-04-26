@@ -206,6 +206,20 @@ const useSettings = () => {
                 }
             }
 
+            if (asValueTypeAny(params?.reasonsPayment?.banner)?.file) {
+                if (asValueTypeAny(params?.reasonsPayment?.banner)?.file?.originFileObj) {
+                    if (params?.reasonsPayment) {
+                        params.reasonsPayment.banner = await imagesRenderUrl(asValueTypeAny(params?.reasonsPayment?.banner)?.file?.originFileObj)
+                    }
+                } else {
+                    if (asValueTypeAny(params?.reasonsPayment?.banner)?.file?.status === "removed") {
+                        if (params?.reasonsPayment) {
+                            params.reasonsPayment.banner = "";
+                        }
+                    }
+                }
+            }
+
 
 
 

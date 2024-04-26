@@ -72,8 +72,9 @@ export interface typeHomePage {
         }[]
     }
     reasonsPayment?: {
-        title?: string
-    }[]
+        title?: string[]
+        banner?: string
+    }
     cooperateWithUs?: string
     partner?: {
         description?: string

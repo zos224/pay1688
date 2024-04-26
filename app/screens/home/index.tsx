@@ -454,9 +454,9 @@ const HomePage = ({ values }: typeProps) => {
         </div>
       </div>
 
-      <div className="container mt-10 lg:mt-[100px] flex flex-col lg:flex-row gap-10">
+      <div className="container mt-10 lg:mt-[100px] flex flex-col lg:flex-row gap-20">
         <div className="flex-1 hover:scale-110 transition-all duration-300">
-          <img src="/images/reson.png" alt="reson" className="object-cover" />
+          <img src={values?.reasonsPayment?.banner} alt="reson" className="object-cover" />
         </div>
         <div className="flex-1">
           <div
@@ -467,7 +467,7 @@ const HomePage = ({ values }: typeProps) => {
             {(values as any)?.title4}
           </div>
           <ul className="text-blue-10 mt-12 flex flex-col gap-6">
-            {values?.reasonsPayment?.map((item, i) => {
+            {values?.reasonsPayment?.title?.map((item, i) => {
               return (
                 <li
                   key={i}
@@ -480,7 +480,7 @@ const HomePage = ({ values }: typeProps) => {
                     icon={faCircleCheck}
                     className="size-8 text-orange-10"
                   />
-                  {item.title}
+                  {item}
                 </li>
               );
             })}

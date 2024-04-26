@@ -514,12 +514,25 @@ const HomePage = ({ setting }: typeProps) => {
               <Input placeholder="Lí do nên sử dụng dịch vụ thanh toán hộ tại NhaphangQT" />
             </Form.Item>
           </div>
-          <Form.List name={["reasonsPayment"]}>
-            {(fields, { add, remove }) => (
+          <Form.Item name={["reasonsPayment", "banner"]} className="mt-2">
+            <Upload
+              listType="picture"
+              defaultFileList={renderValue(home?.reasonsPayment?.banner, [
+                {
+                  name: home?.reasonsPayment?.banner,
+                  url: home?.reasonsPayment?.banner,
+                },
+              ])}
+            >
+              <Button>Chọn ảnh nền</Button>
+            </Upload>
+          </Form.Item>
+          <Form.List name={["reasonsPayment", "title"]}>
+            {(fields: any[], { add, remove }) => (
               <div>
                 {fields.map((field, index) => (
                   <div className=" py-[15px] mb-1" key={index}>
-                    <Form.Item name={[index, "title"]}>
+                    <Form.Item name={[index]}>
                       <Input placeholder="nhập nội dung" />
                     </Form.Item>
                     <Button
@@ -539,6 +552,7 @@ const HomePage = ({ setting }: typeProps) => {
               </div>
             )}
           </Form.List>
+
         </div>
 
         <div className="my-[50px]">
