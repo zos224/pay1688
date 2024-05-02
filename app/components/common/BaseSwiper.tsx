@@ -1,12 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay} from "swiper/modules"
 import {faChevronRight,faChevronLeft} from "@fortawesome/free-solid-svg-icons";
+
 type BaseSwiperProps = { slides: string[] };
 const BaseSwiper = (props: BaseSwiperProps) => {
   const { slides } = props;
   return (
     <div className="relative">
-      <Swiper
+      <div className="mx-10">
+        <Swiper
+        modules={[Navigation, Autoplay]}
         autoplay={true}
         spaceBetween={60}
         slidesPerView={4}
@@ -30,7 +34,7 @@ const BaseSwiper = (props: BaseSwiperProps) => {
         }}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
-      >
+        >
         {slides.map((src) => (
           <SwiperSlide key={src}>
             <div className="max-w-[140px] max-h-[47px] flex items-center">
@@ -38,12 +42,13 @@ const BaseSwiper = (props: BaseSwiperProps) => {
             </div>
           </SwiperSlide>
         ))}
-      </Swiper>
-      <div className="swiper-button-prev absolute -left-5">
-        <FontAwesomeIcon icon={faChevronLeft} className="size-5" />
+        </Swiper>
       </div>
-      <div className="swiper-button-next">
-        <FontAwesomeIcon icon={faChevronRight} className="size-5 text-gray-5" />
+      <div className="swiper-button-prev absolute -left-5 top-1/2">
+        <FontAwesomeIcon icon={faChevronLeft} className="size-5 cursor-pointer" />
+      </div>
+      <div className="swiper-button-next absolute -right-5 top-1/2">
+        <FontAwesomeIcon icon={faChevronRight} className="size-5 cursor-pointer" />
       </div>
     </div>
   );

@@ -300,7 +300,7 @@ const HomePage = ({ setting }: typeProps) => {
               <Input placeholder="Tiếp cận nguồn hàng từ các sàn thương mại điện tử lớn nhất thế giới" />
             </Form.Item>
           </div>
-          <Form.Item name={"ecommerces"} className="mt-2">
+          <Form.Item name={"ecommerces"} className="mt-5">
             <Upload
               listType="picture"
               multiple
@@ -308,8 +308,8 @@ const HomePage = ({ setting }: typeProps) => {
                 home?.ecommerces?.length,
                 home?.ecommerces?.map((item: string) => {
                   return {
-                    url: item || "",
-                    name: item || "",
+                    url:  item,
+                    name: item
                   };
                 })
               )}
@@ -641,6 +641,26 @@ const HomePage = ({ setting }: typeProps) => {
           <Form.Item label="Url Instagram" name={["footer", "urlIs"]}>
             <Input.TextArea placeholder="Nhập text" />
           </Form.Item>
+          <div className="my-[50px]">
+          <div className="font-[500] mt-4">
+            <Form.Item name="title5">
+              <Input placeholder="Sẵn sàng hợp tác cùng chúng tôi?" />
+            </Form.Item>
+          </div>
+          <Form.Item name={"bct"} className="mt-2">
+            <Upload
+              listType="picture"
+              defaultFileList={renderValue(home?.bct, [
+                {
+                  name: home?.bct,
+                  url: home?.bct,
+                },
+              ])}
+            >
+              <Button>Chọn ảnh bộ công thương</Button>
+            </Upload>
+          </Form.Item>
+        </div>
           <hr />
           <br />
           <label className="font-[500]">Logo Website</label>

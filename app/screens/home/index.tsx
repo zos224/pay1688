@@ -445,11 +445,11 @@ const HomePage = ({ values }: typeProps) => {
             </div>
           </div>
         </div>
-        <div className="relative flex-1 flex items-center justify-center">
+        <div data-aos="zoom-in-left" className="relative flex-1 flex items-center justify-center">
           <img
             src="/images/mn-order.png"
             alt="order"
-            className="object-cover "
+            className="object-cover shadow-lg shadow-blue-10 rounded-md hover:scale-105 duration-150 transition-all"
           />
         </div>
       </div>

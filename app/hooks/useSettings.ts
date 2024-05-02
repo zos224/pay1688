@@ -5,6 +5,7 @@ import { message } from 'antd';
 import api from "../api/graphql";
 import { status_api } from '@/api/common';
 import { asValueTypeAny, imagesRenderUrl, imagesRenderUrlFv } from '@/utils';
+import { type } from 'os';
 
 
 const useSettings = () => {
@@ -30,6 +31,7 @@ const useSettings = () => {
                 description: undefined,
                 url: undefined
             },
+        
         },
         service: {
             orderShip: []
@@ -42,6 +44,18 @@ const useSettings = () => {
                 params.banner = await imagesRenderUrl(asValueTypeAny(params.banner))
             }
 
+            if (asValueTypeAny(params?.bct)?.file?.originFileObj) {
+                if (params?.bct) {
+                    params.bct = await imagesRenderUrl(asValueTypeAny(params?.bct)?.file?.originFileObj)
+                }
+            } else {
+                if (asValueTypeAny(params?.bct)?.file?.status === "removed") {
+                    if (params?.bct) {
+                        params.bct = "";
+                    }
+                }
+            }
+            
             if (asValueTypeAny(params.bannerFooter)?.uid) {
                 params.bannerFooter = await imagesRenderUrl(asValueTypeAny(params.bannerFooter))
             }
@@ -115,21 +129,24 @@ const useSettings = () => {
             }
 
             //
-            if (asValueTypeAny(params?.ecommerces)?.length) {
-                for (let [i, file] of asValueTypeAny(params?.ecommerces).entries()) {
-
-                    if (file?.originFileObj) {
-                        if (params.ecommerces) {
-                            params.ecommerces[i] = await imagesRenderUrl(file?.originFileObj)
-                        }
-                    } else {
-                        if (file && file?.status === "removed") {
-                            if (params.ecommerces) {
-                                params.ecommerces[i] = ""
-                            }
-                        }
+            if (params?.ecommerces?.length) {
+                const updates = params.ecommerces.map(async (file, i) => {
+                    const asFile = asValueTypeAny(file);
+                    if (asFile?.originFileObj) {
+                        // Giả sử imagesRenderUrl trả về một Promise
+                        return imagesRenderUrl(asFile.originFileObj);
+                    } else if (asFile && asFile.status === "removed") {
+                        // Đặt giá trị thành chuỗi rỗng nếu file được đánh dấu là 'removed'
+                        return "";
                     }
-                }
+                    // Trả về file không thay đổi nếu không có điều kiện nào được áp dụng
+                    return asFile.url;
+                    
+                   
+                });
+            
+                // Chờ đợi tất cả các Promise được giải quyết
+                params.ecommerces = await Promise.all(updates);
             }
 
             //

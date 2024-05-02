@@ -16,11 +16,13 @@ export default function Footer() {
   const [datas, setData] = React.useState<any>();
   const [bannerFooter, setBannerFooter] = React.useState<any>();
   const [logo, setLogo] = React.useState<any>();
+  const [bct, setBCT] = React.useState<any>();
   const fetchApi = async () => {
     const { data } = await api.apiGetSetting({});
     setData(data?.data?.content?.home?.footer);
     setBannerFooter(data?.data?.content?.home?.bannerFooter || "");
     setLogo(data?.data?.content?.home?.logoWebsite);
+    setBCT(data?.data?.content?.home?.bct);
   };
 
   React.useEffect(() => {
@@ -28,21 +30,21 @@ export default function Footer() {
   }, []);
   return (
     <footer className="bg-blue-10 text-white">
-      <div className="container py-12 mb-12 flex lg:flex-row flex-col gap-10 border-b border-white text-white">
+      <div className="container pt-12 mb-12 flex lg:flex-row flex-col gap-20 border-b border-white text-white">
         <div className="flex-1">
-          <p className="text-2xl lg:text-5xl mb-7 ">{datas?.domain || ""}</p>
+          <img src={logo} alt="logo" width={200} height={100} />
           <p className="mb-16 font-medium">{datas?.description || ""}</p>
-          <BaseButton href={datas?.url || ""} icon={faShoppingCart}>
+          <BaseButton color="orange" href={datas?.url || ""} icon={faShoppingCart}>
             Tạo đơn đặt hàng
           </BaseButton>
         </div>
         <div className="flex-1">
-          <img src={bannerFooter || ""} alt="logo" />
+          <img className="object-cover max-h-96 m-auto" src={bannerFooter || ""} alt="logo" />
         </div>
       </div>
       <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
         <div>
-          <img src={logo} alt="logo" width={50} height={50} />
+          <img src={logo} alt="logo" width={200} height={100} />
           <div className="flex gap-7 mt-8">
             <Link href={datas?.urlIn || ""} className="text-white">
               <FontAwesomeIcon icon={faLinkedinIn} className="size-7" />
@@ -57,6 +59,7 @@ export default function Footer() {
               <FontAwesomeIcon icon={faInstagram} className="size-7" />
             </Link>
           </div>
+          <img className="mt-5" src={bct} alt="bộ công thương" width={200} height={100}></img>
         </div>
         <div>
           <p className="mb-5 text-2xl font-semibold">Liên hệ chúng tôi</p>

@@ -7,6 +7,7 @@ export interface typeSettings {
 export interface typeHomePage {
     bannerFooter?: string
     logoWebsite?: string
+    bct?: string
     favicon?: string,
     homeTitle?: string
     homeDescription?: string
