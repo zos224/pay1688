@@ -49,10 +49,10 @@ export default function Sidebar({ collapsed }: SidebarProps) {
             label: "Cấu hình Website",
           },
 
-          {
-            key: "/admin/service",
-            label: "Dịch vụ",
-          },
+          // {
+          //   key: "/admin/service",
+          //   label: "Dịch vụ",
+          // },
           {
             key: "/admin/new",
             label: "Bài viết",

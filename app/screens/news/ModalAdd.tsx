@@ -90,6 +90,7 @@ const ModalAdd = ({ item, onClose }: any) => {
               { label: "Tin nổi bật", value: 4 },
               { label: "Hướng dẫn", value: 5 },
               { label: "Biểu phí", value: 6 },
+              { label: "Dịch vụ", value: 8},
               { label: "Không hiển thị", value: 7 },
             ]}
           />

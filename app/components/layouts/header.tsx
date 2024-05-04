@@ -1,4 +1,4 @@
-import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faChevronDown, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, ConfigProvider, Drawer, Menu, MenuProps } from "antd";
 import Link from "next/link";
@@ -21,7 +21,7 @@ export default function Header({ logo }: { logo?: any }) {
     {
       label: "DỊCH VỤ",
       key: "/service",
-      // children: [],
+      children: [],
     },
     {
       label: "BIỂU PHÍ",
@@ -79,6 +79,31 @@ export default function Header({ logo }: { logo?: any }) {
     } catch (error) {}
   };
 
+  const getNewsS = async () => {
+    try {
+      const { data } = await api.apiGetNews({ type: 8, size: 10, page: 1 });
+
+      if (data.status.code === 200) {
+        setItems((old: any) => {
+          return old.map((val: any) => {
+            if (val.key === "/service") {
+              return {
+                ...val,
+                children: data.data.map((item: any) => ({
+                  label: item.title,
+                  key: "/service/" + item.id,
+                })),
+              };
+            }
+            return {
+              ...val,
+            };
+          });
+        });
+      }
+    } catch (error) {}
+  };
+
   const getNewsP = async () => {
     try {
       const { data } = await api.apiGetNews({ type: 6, size: 10, page: 1 });
@@ -115,6 +140,7 @@ export default function Header({ logo }: { logo?: any }) {
   React.useEffect(() => {
     getNewsP();
     getNewsC();
+    getNewsS();
     getUrl();
   }, []);
 
@@ -178,7 +204,17 @@ export default function Header({ logo }: { logo?: any }) {
               onClick={onClick}
               selectedKeys={[current]}
               mode="horizontal"
-              items={items}
+              items={items.map(item => {
+                if (item.children && item.children.length > 0) {
+                  return {
+                    ...item,
+                    label: (
+                      <span className="flex items-center gap-2">{item.label} <FontAwesomeIcon icon={faChevronDown} className="size-4" /></span>
+                    )
+                  }
+                }
+                return item; // Add this line to handle the case when item.children is undefined
+              })}
             />
           </ConfigProvider>
         </div>
