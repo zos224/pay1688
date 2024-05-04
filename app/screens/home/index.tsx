@@ -346,7 +346,7 @@ const HomePage = ({ values }: typeProps) => {
             {values?.paymentService?.description}
           </div>
           <div data-aos="zoom-in" className="mt-[72px] text-center lg:text-left flex justify-center">
-            <button className="bg-blue-10 hover:bg-blue-20 text-white px-4 py-2">
+            <button className="bg-blue-10 hover:bg-blue-20 text-white px-4 py-2 rounded-full">
               <Link href={values?.paymentService?.url || ""}>
                 Tra cứu tỷ giá hôm nay
               </Link>
@@ -369,7 +369,7 @@ const HomePage = ({ values }: typeProps) => {
             data-aos="fade-up-left"
             className="lg:text-left text-center mt-7 flex justify-center"
           >
-            <button className="bg-blue-10 hover:bg-blue-20 text-white px-4 py-2">
+            <button className="bg-blue-10 hover:bg-blue-20 text-white px-4 py-2 rounded-full">
               <Link href={values?.depositService?.url || ""}>Xem thêm</Link>
             </button>
           </div>
@@ -496,7 +496,7 @@ const HomePage = ({ values }: typeProps) => {
         <img
           src={values?.cooperateWithUs || "/images/content-home-bottom.png"}
           alt=""
-          className="object-cover scale-[0.999]"
+          className="object-cover scale-[0.999] max-h-72 w-full"
         />
       </div>
 

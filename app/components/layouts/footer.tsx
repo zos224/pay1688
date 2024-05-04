@@ -30,7 +30,7 @@ export default function Footer() {
   }, []);
   return (
     <footer className="bg-blue-10 text-white">
-      <div className="container pt-12 mb-12 flex lg:flex-row flex-col gap-20 border-b border-white text-white">
+      <div className="container pt-12 mb-12 lg:flex-row flex-col gap-20 border-b border-white text-white hidden">
         <div className="flex-1">
           <img src={logo} alt="logo" width={200} height={100} />
           <p className="mb-16 font-medium">{datas?.description || ""}</p>
@@ -42,7 +42,7 @@ export default function Footer() {
           <img className="object-cover max-h-96 m-auto" src={bannerFooter || ""} alt="logo" />
         </div>
       </div>
-      <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
+      <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 pt-10">
         <div>
           <img src={logo} alt="logo" width={200} height={100} />
           <div className="flex gap-7 mt-8">
