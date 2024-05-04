@@ -496,7 +496,7 @@ const HomePage = ({ values }: typeProps) => {
         <img
           src={values?.cooperateWithUs || "/images/content-home-bottom.png"}
           alt=""
-          className="object-cover scale-[0.999] max-h-48 w-full"
+          className="object-cover scale-[0.999] max-h-52 w-full"
         />
       </div>
 
