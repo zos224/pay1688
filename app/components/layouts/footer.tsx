@@ -91,7 +91,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="bg-text-blue-20 text-center py-4 text-white font-medium text-lg">
-        Copyright © 2024 . Nhập hàng quốc tế
+        Copyright © 2024 - pay1688.vn
       </div>
     </footer>
   );
