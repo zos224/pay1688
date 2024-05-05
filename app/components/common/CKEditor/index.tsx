@@ -1,5 +1,38 @@
 import React, { useEffect, useRef } from "react";
 
+import { Axios } from "@/api/axios";
+
+const uploadAdapter = (loader: any) => {
+    return {
+        upload: () => {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    const file = await loader.file;
+                    Axios.postImages("https://api.ani2am.me/upload",
+                        file, "image").then((res) => {
+                            resolve({
+                                default: res?.resul,
+                            });
+                            return {
+                                    default: res?.resul,
+                                };
+                    })
+                } 
+                catch (error) {
+                    reject(error);
+                }
+            })
+        },
+        abort: () => {}
+    }
+}
+
+const uploadPlugin = (editor: any) => {
+    editor.plugins.get("FileRepository").createUploadAdapter = (loader: any) => {
+        return uploadAdapter(loader);
+    };
+};
+
 type TypeProps = {
   placeholder?: string;
   onChange?: (arg?: any) => void;
@@ -28,26 +61,7 @@ const CKEditor = ({ onChange, name, value, placeholder }: TypeProps) => {
           name={name}
           editor={ClassicEditor}
           config={{
-            ckfinder: {
-              uploadUrl: "http://103.57.220.76:3201/", //Enter your upload url
-            },
-            /*
-
-{
-    "uploaded": true,
-    "url": "http://127.0.0.1/uploaded-image.jpeg"
-}
-
-{
-    "uploaded": false,
-    "error": {
-        "message": "could not upload this image"
-    }
-}
-
-
-
-            */
+            extraPlugins: [uploadPlugin],
             placeholder: placeholder || "",
           }}
           data={value}
