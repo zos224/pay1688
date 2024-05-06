@@ -324,7 +324,7 @@ const HomePage = ({ values }: typeProps) => {
       </div>
 
       <div className="container">
-        <div className="title text-center mt-10 lg:mt-[90px] mb-8">
+        <div className="title lg:text-3xl text-center mt-10 lg:mt-[90px] mb-8">
           {(values as any)?.title7 || ""}
         </div>
         <BaseSwiper slides={values?.ecommerces || slides} />
@@ -387,7 +387,7 @@ const HomePage = ({ values }: typeProps) => {
 
       <div className="container flex mt-12 lg:flex-row flex-col gap-10">
         <div className="flex-1">
-          <div className="title mb-14">{(values as any)?.title}</div>
+          <div className="title mb-14 lg:text-3xl">{(values as any)?.title}</div>
           {values?.depositProcess?.step?.map((item, i) => (
             <CollapsibleHover key={i} index={i} title={item?.title || ""}>
               {item.description}
@@ -400,7 +400,7 @@ const HomePage = ({ values }: typeProps) => {
             alt="warehourse"
             className="object-cover"
           />
-          <BaseButton className="btn-orange mx-auto" icon={faShoppingCart}>
+          <BaseButton className="btn-orange mx-auto mt-10" icon={faShoppingCart}>
             <Link href={values?.depositProcess?.url || ""}>Tạo đơn ký gửi</Link>
           </BaseButton>
         </div>
