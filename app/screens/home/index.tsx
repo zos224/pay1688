@@ -277,7 +277,7 @@ const HomePage = ({ values }: typeProps) => {
                 height={40}
                 alt="box"
               />
-              <div className="text-white font-bold max-w-[293px] text-lg mt-5">
+              <div className="text-white font-bold max-w-[293px] lg:text-3xl mt-5">
                 {values?.depositVnTq?.title || ""}
               </div>
               <div className="text-white max-w-[319px] mt-4">
@@ -294,7 +294,7 @@ const HomePage = ({ values }: typeProps) => {
                 height={40}
                 alt="wallet"
               />
-              <div className="text-white font-bold max-w-[293px] text-lg mt-5">
+              <div className="text-white font-bold max-w-[293px] lg:text-3xl mt-5">
                 {values?.depositTqVn?.title || ""}
               </div>
               <div className="text-white max-w-[319px] mt-4">
@@ -311,7 +311,7 @@ const HomePage = ({ values }: typeProps) => {
                 height={40}
                 alt="wallet"
               />
-              <div className="text-white font-bold max-w-[293px] text-lg mt-5">
+              <div className="text-white font-bold max-w-[293px] lg:text-3xl mt-5">
                 {values?.nhapKhauChinhNgach?.title || ""}
               </div>
               <div className="text-white max-w-[319px] mt-4">
@@ -324,7 +324,7 @@ const HomePage = ({ values }: typeProps) => {
       </div>
 
       <div className="container">
-        <div className="title text-center mt-10 lg:mt-[90px] mb-8">
+        <div className="title lg:text-3xl text-center mt-10 lg:mt-[90px] mb-8">
           {(values as any)?.title7 || ""}
         </div>
         <BaseSwiper slides={values?.ecommerces || slides} />
@@ -416,7 +416,7 @@ const HomePage = ({ values }: typeProps) => {
           />{" "}
         </div>
         <div className="flex-1">
-          <div className="title text-blue-10 font-semibold mb-10">
+          <div className="title lg:text-3xl text-blue-10 font-semibold mb-10">
             {(values as any)?.title2}
           </div>
           <div>{values?.financialManagement?.description}</div>
@@ -430,7 +430,7 @@ const HomePage = ({ values }: typeProps) => {
             {values?.orderManage?.itemOrder?.map((item, i) => {
               return (
                 <div key={i}>
-                  <div className="text-2xl text-blue-10 font-medium">
+                  <div className="lg:text-2xl text-blue-10 font-medium">
                     {item?.title}
                   </div>
                   <div data-aos="fade-up">{item?.description}</div>
