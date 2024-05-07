@@ -1,5 +1,5 @@
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
-import { faChevronLeft, faChevronRight, faTruck, faWallet } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronLeft, faChevronRight, faTruck, faWallet } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import BaseButton from "@/components/common/BaseButton";
@@ -13,7 +13,7 @@ import "swiper/css";
 import { typeHomePage } from "@/api/type/settings";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const slides = [
   "/images/aliexpress-logo.png",
@@ -41,9 +41,15 @@ const HomePage = ({ values }: typeProps) => {
   const [moVandon, setMoVandon] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const handleAnimationEnd = () => {
-    if (modalRef.current != null && modalRef.current.classList.contains("animate-left-to-right")) {
-        modalRef.current.classList.remove("animate-left-to-right");
-        modalRef.current.classList.add("animate-right-to-left");
+    if (modalRef.current != null && (modalRef.current.classList.contains("animate-left-to-right") || modalRef.current.classList.contains("animate-top-to-bottom"))) {
+        if (modalRef.current.classList.contains("animate-left-to-right")) {
+          modalRef.current.classList.remove("animate-left-to-right");
+          modalRef.current.classList.add("animate-right-to-left");
+        }
+        if (modalRef.current.classList.contains("animate-top-to-bottom")) {
+          modalRef.current.classList.remove("animate-top-to-bottom");
+          modalRef.current.classList.add("animate-bottom-to-top");
+        }
         setMoTigia(false);
         setMoTinhCuoc(false);
         setMoVandon(false);
@@ -52,43 +58,60 @@ const HomePage = ({ values }: typeProps) => {
 
   const closeModal = () => {
     if (modalRef.current != null) {
-      modalRef.current.classList.remove("animate-right-to-left");
-      modalRef.current.classList.add("animate-left-to-right");
+      if (window.innerWidth > 768) {
+        modalRef.current.classList.remove("animate-right-to-left");
+        modalRef.current.classList.add("animate-left-to-right");
+      }
+      if (window.innerWidth <= 768) {
+        modalRef.current.classList.remove("animate-bottom-to-top");
+        modalRef.current.classList.add("animate-top-to-bottom");
+      }
     }
   }
+
+  useEffect(() => {
+    if (modalRef.current != null) {
+      if (window.innerWidth <= 768) {
+        modalRef.current.classList.add("animate-bottom-to-top");
+      }
+      else {
+        modalRef.current.classList.add("animate-right-to-left");
+      }
+    }
+  }, [modalRef.current])
   useAOS();
 
   return (
     <div className="relative overflow-x-hidden">
-      <div className="z-10 fixed top-[180px]  right-0">
+      <div className="z-10 fixed md:top-[180px]  right-0 bottom-0 w-full md:w-fit">
         {!moTigia && !moTinhCuoc && !moVandon ? 
         (
-        <div className=" flex flex-col items-end gap-3 ">
-          <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="group h-10 rounded-tl-xl px-3.5 py-6 bg-blue-10 text-white flex items-center">
+        <div className="flex md:flex-col flex-row md:items-end md:gap-3 items-stretch w-full">
+          <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="hidden md:flex group md:h-10 md:rounded-tl-xl px-3.5 py-1 md:py-6 bg-blue-10 text-white items-center">
             <FontAwesomeIcon icon={faChevronLeft} className="size-6" />
           </button>
-          <button onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}} className="group h-10 px-3 py-6 bg-blue-10 text-white translate-x-[64%] hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
-            <FontAwesomeIcon icon={faUsd} className="size-6" />
-            <span className="opacity-0 group-hover:opacity-100 ">
+          <button onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}} className="group flex-grow md:h-10 px-3 py-2 md:py-6 bg-blue-10 text-white md:translate-x-[64%] md:hover:translate-x-0 flex flex-col md:inline-flex md:flex-row md:gap-2 gap-1 duration-200 ease-in-out transition-all items-center">
+            <FontAwesomeIcon icon={faUsd} className="md:size-6 size-5"  />
+            <span className="md:opacity-0 group-hover:opacity-100 text-sm md:text-base ">
               Tra cứu tỉ giá
             </span>
           </button>
-          <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="group h-10 px-3 py-6 bg-blue-10 text-white translate-x-[75%] hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
-            <FontAwesomeIcon icon={faWallet} className="size-6" />
-            <span className="opacity-0 group-hover:opacity-100">
+          <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="group flex-grow md:h-10 px-3 py-2 md:py-6 bg-blue-10 text-white md:translate-x-[75%] md:hover:translate-x-0 flex flex-col md:inline-flex md:flex-row md:gap-2 gap-1 duration-200 ease-in-out transition-all items-center">
+            <FontAwesomeIcon icon={faWallet} className="md:size-6 size-5" />
+            <span className="md:opacity-0 group-hover:opacity-100 text-sm md:text-base">
               Tính cước vận chuyển
             </span>
           </button>
-          <button onClick={() => {setMoVandon(true); setMoTigia(false); setMoTinhCuoc(false)}} className="group h-10 rounded-bl-xl px-3 py-6 bg-blue-10 text-white translate-x-[70%] hover:translate-x-0 inline-flex gap-2 duration-200 ease-in-out transition-all items-center">
-            <FontAwesomeIcon icon={faTruck} className="size-6" />
-            <span className="opacity-0 group-hover:opacity-100 ">
+          <button onClick={() => {setMoVandon(true); setMoTigia(false); setMoTinhCuoc(false)}} className="group flex-grow md:h-10 md:rounded-bl-xl px-3 py-2 md:py-6 bg-blue-10 text-white md:translate-x-[70%] md:hover:translate-x-0 flex flex-col md:inline-flex md:flex-row md:gap-2 gap-1 duration-200 ease-in-out transition-all items-center">
+            <FontAwesomeIcon icon={faTruck} className="md:size-6 size-5" />
+            <span className="md:opacity-0 group-hover:opacity-100 text-sm md:text-base ">
               Tra cứu vận đơn
             </span>
           </button>
         </div> 
         ) : (
-          <div ref={modalRef} onAnimationEnd={handleAnimationEnd} className="flex flex-col items-end animate-right-to-left">
-            <div className="flex w-fit items-center bg-blue-10 rounded-tl-xl">
+          <div ref={modalRef} onAnimationEnd={handleAnimationEnd} className="flex flex-col items-end">
+            <div className="hidden md:flex w-fit items-center bg-blue-10 rounded-tl-xl">
               <div className={`px-5 py-3 rounded-tl-xl cursor-pointer ${moTigia ? "bg-blue-5 text-blue-10" : "text-white"}`} onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}}>
                 <FontAwesomeIcon icon={faUsd} className="size-6" />
               </div>
@@ -102,11 +125,16 @@ const HomePage = ({ values }: typeProps) => {
                 <FontAwesomeIcon icon={faChevronRight} className="size-6"/>
               </div>
             </div>
-            <div className="max-w-100 bg-blue-5 p-3 rounded-l-md max-h-96 overflow-auto">
+            <div className="md:max-w-100 w-full bg-blue-5 p-3 rounded-l-md md:max-h-96 overflow-auto">
               {moTinhCuoc && 
                 <div>
-                  <div className="border-b text-xl font-semibold uppercase py-2 text-blue-10">
-                    Tính cước vận chuyển TQ-VN
+                  <div className="flex justify-between items-center">
+                    <div className="border-b text-xl font-semibold uppercase py-2 text-blue-10">
+                      Tính cước vận chuyển TQ-VN
+                    </div>
+                    <div className={`block md:hidden px-5 py-3 cursor-pointer text-blue-10`} onClick={closeModal}>
+                      <FontAwesomeIcon icon={faChevronDown} className="size-6"/>
+                    </div>
                   </div>
                   <div className="flex gap-2 text-sm mt-3">
                     <div className="w-1/3">
@@ -182,8 +210,13 @@ const HomePage = ({ values }: typeProps) => {
               }
               {moTigia &&
                 <div>
-                  <div className="border-b text-xl uppercase py-2 font-semibold text-blue-10">
-                    Tra cứu tỉ giá
+                  <div className="flex justify-between items-center">
+                    <div className="border-b text-xl font-semibold uppercase py-2 text-blue-10">
+                      Tra cứu tỉ giá
+                    </div>
+                    <div className={`block md:hidden px-5 py-3 cursor-pointer text-blue-10`} onClick={closeModal}>
+                      <FontAwesomeIcon icon={faChevronDown} className="size-6"/>
+                    </div>
                   </div>
                   <div className="mt-4">
                     <label>Nhập số tiền cần thanh toán hộ</label>
@@ -216,8 +249,13 @@ const HomePage = ({ values }: typeProps) => {
               }
               {moVandon &&
                 <div>
-                  <div className="border-b text-xl uppercase py-2 font-semibold text-blue-10">
-                    Tra cứu vận đơn
+                  <div className="flex justify-between items-center">
+                    <div className="border-b text-xl font-semibold uppercase py-2 text-blue-10">
+                      Tra cứu vận đơn
+                    </div>
+                    <div className={`block md:hidden px-5 py-3 cursor-pointer text-blue-10`} onClick={closeModal}>
+                      <FontAwesomeIcon icon={faChevronDown} className="size-6"/>
+                    </div>
                   </div>
                   <div className="mt-3 text-sm">
                     Nhập mã vận đơn
@@ -230,7 +268,7 @@ const HomePage = ({ values }: typeProps) => {
                   </div>
                   <div className="mt-5">
                     <div className="font-semibold text-blue-10">Trạng thái</div>
-                    <table className="mt-4">
+                    {/* <table className="mt-4">
                       <thead>
                         <tr>
                           <th>Thời gian</th>
@@ -251,7 +289,7 @@ const HomePage = ({ values }: typeProps) => {
                           <td className="px-4 py-2">Đơn hàng đang được thông quan</td>
                         </tr>
                       </tbody>
-                    </table>
+                    </table> */}
                   </div>
                 </div>
               }
@@ -277,7 +315,7 @@ const HomePage = ({ values }: typeProps) => {
                 height={40}
                 alt="box"
               />
-              <div className="text-white font-bold max-w-[293px] lg:text-3xl mt-5">
+              <div className="text-white font-bold max-w-[293px] text-lg mt-5">
                 {values?.depositVnTq?.title || ""}
               </div>
               <div className="text-white max-w-[319px] mt-4">
@@ -294,7 +332,7 @@ const HomePage = ({ values }: typeProps) => {
                 height={40}
                 alt="wallet"
               />
-              <div className="text-white font-bold max-w-[293px] lg:text-3xl mt-5">
+              <div className="text-white font-bold max-w-[293px] text-lg mt-5">
                 {values?.depositTqVn?.title || ""}
               </div>
               <div className="text-white max-w-[319px] mt-4">
@@ -311,7 +349,7 @@ const HomePage = ({ values }: typeProps) => {
                 height={40}
                 alt="wallet"
               />
-              <div className="text-white font-bold max-w-[293px] lg:text-3xl mt-5">
+              <div className="text-white font-bold max-w-[293px] text-lg mt-5">
                 {values?.nhapKhauChinhNgach?.title || ""}
               </div>
               <div className="text-white max-w-[319px] mt-4">
@@ -416,7 +454,7 @@ const HomePage = ({ values }: typeProps) => {
           />{" "}
         </div>
         <div className="flex-1">
-          <div className="title lg:text-3xl text-blue-10 font-semibold mb-10">
+          <div className="title text-blue-10 font-semibold mb-10">
             {(values as any)?.title2}
           </div>
           <div>{values?.financialManagement?.description}</div>
@@ -430,7 +468,7 @@ const HomePage = ({ values }: typeProps) => {
             {values?.orderManage?.itemOrder?.map((item, i) => {
               return (
                 <div key={i}>
-                  <div className="lg:text-2xl text-blue-10 font-medium">
+                  <div className="text-2xl text-blue-10 font-medium">
                     {item?.title}
                   </div>
                   <div data-aos="fade-up">{item?.description}</div>

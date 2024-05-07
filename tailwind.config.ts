@@ -51,11 +51,21 @@ const config: Config = {
         "right-to-left": {
           "0%": { transform: "translateX(100%)" },
           "100%": { transform: "translateX(0)" },
-        }
+        },
+        "bottom-to-top": {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+        "top-to-bottom": {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(100%)" },
+        },
       },
       animation: {
         "left-to-right": "left-to-right 0.2s ease-in-out",
         "right-to-left": "right-to-left 0.2s ease-in-out",
+        "bottom-to-top": "bottom-to-top 0.2s ease-in-out",
+        "top-to-bottom": "top-to-bottom 0.2s ease-in-out",
       },
     },
   },

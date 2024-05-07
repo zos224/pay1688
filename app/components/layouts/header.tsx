@@ -3,9 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, ConfigProvider, Drawer, Menu, MenuProps } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "@/api/graphql";
-import { get } from "http";
 
 export default function Header({ logo }: { logo?: any }) {
   const [open, setOpen] = useState(false);
@@ -40,7 +39,17 @@ export default function Header({ logo }: { logo?: any }) {
       label: "BLOG",
       key: "/blog",
     },
+    {
+      label: "login",
+      key: urlLogin,
+    },
+    {
+      label: "register",
+      key: urlRegister,
+    },
   ]);
+
+ 
   const onClick: MenuProps["onClick"] = (e) => {
     console.log("click ", e);
     setCurrent(e.key);
@@ -169,7 +178,38 @@ export default function Header({ logo }: { logo?: any }) {
                 onClick={onClick}
                 selectedKeys={[current]}
                 mode="inline"
-                items={items}
+                items={items.map(item => {
+                  if (item.label == "login" || item.label == "register") {
+                    if (item.label == "register") {
+                      return {
+                        ...item,
+                        key: urlRegister,
+                        label: (
+                          <Link href={urlRegister}>
+                            <Button className="btn-orange flex items-center gap-2 text-[14px] h-[35px]">
+                              <FontAwesomeIcon icon={faUser} className="size-3" />
+                              Đăng ký
+                            </Button>
+                          </Link>
+                        )
+                      }
+                    }
+                    return {
+                      ...item,
+                      key: urlLogin,
+                      label: (
+                        <Link href={urlLogin}>
+                          <Button className="btn-orange w-full flex items-center gap-2 text-[14px] h-[35px]">
+                            <FontAwesomeIcon icon={faUser} className="size-3" />
+                            Đăng nhập
+                          </Button>
+                        </Link>
+                      )
+                    }
+                  }
+                  return item; // Add this line to handle the case when item.children is undefined
+                })
+                }
               />
             </ConfigProvider>
           </Drawer>
@@ -205,21 +245,24 @@ export default function Header({ logo }: { logo?: any }) {
               selectedKeys={[current]}
               mode="horizontal"
               items={items.map(item => {
-                if (item.children && item.children.length > 0) {
-                  return {
-                    ...item,
-                    label: (
-                      <span className="flex items-center gap-2">{item.label} <FontAwesomeIcon icon={faChevronDown} className="size-4" /></span>
-                    )
+                if (item.label !== "login" && item.label !== "register") {
+                  if (item.children && item.children.length > 0) {
+                    return {
+                      ...item,
+                      label: (
+                        <span className="flex items-center gap-2">{item.label} <FontAwesomeIcon icon={faChevronDown} className="size-4" /></span>
+                      )
+                    }
                   }
+                  return item; // Add this line to handle the case when item.children is undefined
                 }
-                return item; // Add this line to handle the case when item.children is undefined
+                return null
               })}
             />
           </ConfigProvider>
         </div>
 
-        <div className="flex gap-3 items-stretch">
+        <div className="md:flex gap-3 items-stretch hidden">
           <Link href={urlRegister}>
             <Button className="btn-orange flex items-center gap-2 text-[14px] h-[35px]">
               <FontAwesomeIcon icon={faUser} className="size-3" />
