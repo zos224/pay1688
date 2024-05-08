@@ -86,23 +86,23 @@ const HomePage = ({ values }: typeProps) => {
       <div className="z-10 fixed md:top-[180px]  right-0 bottom-0 w-full md:w-fit">
         {!moTigia && !moTinhCuoc && !moVandon ? 
         (
-        <div className="flex md:flex-col flex-row md:items-end md:gap-3 items-stretch w-full">
+        <div className="flex md:flex-col flex-row md:items-end md:gap-3 items-stretch w-full shadow-[rgba(0,0,15,1)_0px_0px_14px_0px] md:shadow-none">
           <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="hidden md:flex group md:h-10 md:rounded-tl-xl px-3.5 py-1 md:py-6 bg-blue-10 text-white items-center">
             <FontAwesomeIcon icon={faChevronLeft} className="size-6" />
           </button>
-          <button onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}} className="group flex-grow md:h-10 px-3 py-2 md:py-6 bg-blue-10 text-white md:translate-x-[64%] md:hover:translate-x-0 flex flex-col md:inline-flex md:flex-row md:gap-2 gap-1 duration-200 ease-in-out transition-all items-center">
+          <button onClick={() => {setMoTigia(true); setMoTinhCuoc(false); setMoVandon(false)}} className="group flex-grow md:h-10 md:px-3 py-2 md:py-6 bg-blue-10 text-white md:translate-x-[64%] md:hover:translate-x-0 flex flex-col md:inline-flex md:flex-row md:gap-2 gap-1 duration-200 ease-in-out transition-all items-center">
             <FontAwesomeIcon icon={faUsd} className="md:size-6 size-5"  />
             <span className="md:opacity-0 group-hover:opacity-100 text-sm md:text-base ">
               Tra cứu tỉ giá
             </span>
           </button>
-          <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="group flex-grow md:h-10 px-3 py-2 md:py-6 bg-blue-10 text-white md:translate-x-[75%] md:hover:translate-x-0 flex flex-col md:inline-flex md:flex-row md:gap-2 gap-1 duration-200 ease-in-out transition-all items-center">
+          <button onClick={() => {setMoTinhCuoc(true); setMoTigia(false); setMoVandon(false)}} className="group flex-grow border-x border-gray-500 md:border-none md:h-10 md:px-3 py-2 md:py-6 bg-blue-10 text-white md:translate-x-[75%] md:hover:translate-x-0 flex flex-col md:inline-flex md:flex-row md:gap-2 gap-1 duration-200 ease-in-out transition-all items-center">
             <FontAwesomeIcon icon={faWallet} className="md:size-6 size-5" />
             <span className="md:opacity-0 group-hover:opacity-100 text-sm md:text-base">
               Tính cước vận chuyển
             </span>
           </button>
-          <button onClick={() => {setMoVandon(true); setMoTigia(false); setMoTinhCuoc(false)}} className="group flex-grow md:h-10 md:rounded-bl-xl px-3 py-2 md:py-6 bg-blue-10 text-white md:translate-x-[70%] md:hover:translate-x-0 flex flex-col md:inline-flex md:flex-row md:gap-2 gap-1 duration-200 ease-in-out transition-all items-center">
+          <button onClick={() => {setMoVandon(true); setMoTigia(false); setMoTinhCuoc(false)}} className="group flex-grow md:h-10 md:rounded-bl-xl md:px-3 py-2 md:py-6 bg-blue-10 text-white md:translate-x-[70%] md:hover:translate-x-0 flex flex-col md:inline-flex md:flex-row md:gap-2 gap-1 duration-200 ease-in-out transition-all items-center">
             <FontAwesomeIcon icon={faTruck} className="md:size-6 size-5" />
             <span className="md:opacity-0 group-hover:opacity-100 text-sm md:text-base ">
               Tra cứu vận đơn
