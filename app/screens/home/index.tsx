@@ -221,9 +221,8 @@ const HomePage = ({ values }: typeProps) => {
                   <div className="mt-2 text-sm">
                     <label>Chọn kho nhận ở TQ</label>
                     <select className="w-full p-2 border border-gray-10 rounded-md outline-blue-10 mt-2">
-                      <option>Thẩm Quyến</option>
-                      <option>Đại Hán</option>
-                      <option>Kinh Thành</option>
+                      <option value={"Bangtuong"}>Bằng Tường</option>
+                      <option value={"Quangchau"}>Quảng Châu</option>
                     </select>
                   </div>
                   <div className="mt-2 text-sm">
@@ -239,7 +238,7 @@ const HomePage = ({ values }: typeProps) => {
                     <div className="flex items-center flex-wrap gap-y-2 mt-2">
                       <div className="flex items-center w-1/3">
                         <input type="checkbox" className="mr-2 peer relative appearance-none w-5 h-5 rounded-full border border-black checked:bg-blue-10" />
-                        <label>Nẹp giấy</label>
+                        <label>Đóng xốp</label>
                       </div>
                       <div className="flex items-center w-1/3">
                         <input type="checkbox" className="mr-2 peer relative appearance-none w-5 h-5 rounded-full border border-black checked:bg-blue-10" />
@@ -426,7 +425,7 @@ const HomePage = ({ values }: typeProps) => {
       </div>
 
       <div className="container">
-        <div className="title lg:text-3xl text-center mt-10 lg:mt-[90px] mb-8">
+        <div className="title lg:text-4xl text-center mt-10 lg:mt-[90px] mb-8">
           {(values as any)?.title7 || ""}
         </div>
         <BaseSwiper slides={values?.ecommerces || slides} />
@@ -441,7 +440,7 @@ const HomePage = ({ values }: typeProps) => {
           alt="alipay"
         />
         <div className="flex-1">
-          <div data-aos="fade-down" className="title lg:text-3xl text-center mx-auto">
+          <div data-aos="fade-down" className="title lg:text-4xl text-center mx-auto">
             {(values as any)?.title8 || ""}
           </div>
           <div data-aos="fade-up" className="mt-[62px] text-xl">
@@ -460,7 +459,7 @@ const HomePage = ({ values }: typeProps) => {
         <div className="flex-1">
           <div
             data-aos="fade-down-left"
-            className="mb-7 title lg:text-3xl font-semibold"
+            className="mb-7 title lg:text-4xl font-semibold"
           >
             {(values as any)?.title9 || ""}
           </div>
@@ -489,7 +488,7 @@ const HomePage = ({ values }: typeProps) => {
 
       <div className="container flex mt-12 lg:flex-row flex-col gap-10">
         <div className="flex-1">
-          <div className="title mb-14 lg:text-3xl">{(values as any)?.title}</div>
+          <div className="title mb-14 lg:text-4xl">{(values as any)?.title}</div>
           {values?.depositProcess?.step?.map((item, i) => (
             <CollapsibleHover key={i} index={i} title={item?.title || ""}>
               {item.description}
@@ -518,7 +517,7 @@ const HomePage = ({ values }: typeProps) => {
           />{" "}
         </div>
         <div className="flex-1">
-          <div className="title text-blue-10 font-semibold mb-10">
+          <div className="title lg:text-4xl text-blue-10 font-semibold mb-10">
             {(values as any)?.title2}
           </div>
           <div>{values?.financialManagement?.description}</div>
@@ -527,7 +526,7 @@ const HomePage = ({ values }: typeProps) => {
 
       <div className="container mt-10 lg:mt-[100px] flex flex-col lg:flex-row gap-10">
         <div className="flex-1">
-          <div className=" title  mb-14">{(values as any)?.title3}</div>
+          <div className=" title lg:text-4xl  mb-14">{(values as any)?.title3}</div>
           <div className="grid grid-cols-2 gap-12">
             {values?.orderManage?.itemOrder?.map((item, i) => {
               return (
@@ -564,7 +563,7 @@ const HomePage = ({ values }: typeProps) => {
           <div
             data-aos="fade-down"
             data-aos-anchor-placement="center-bottom"
-            className="title"
+            className="title lg:text-4xl"
           >
             {(values as any)?.title4}
           </div>
@@ -590,7 +589,7 @@ const HomePage = ({ values }: typeProps) => {
         </div>
       </div>
 
-      <div className="title my-[50px] text-center">
+      <div className="title lg:text-4xl my-[50px] text-center">
         {(values as any)?.title5}
       </div>
 
@@ -603,7 +602,7 @@ const HomePage = ({ values }: typeProps) => {
       </div>
 
       <div className="container text-center mt-10">
-        <div className="text-4xl text-blue-10 font-medium">
+        <div className="title lg:text-4xl text-blue-10 font-medium">
           {(values as any)?.title6}
         </div>
         <div className="mt-5 mb-7">{values?.partner?.description}</div>
