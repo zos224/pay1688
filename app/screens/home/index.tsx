@@ -81,6 +81,70 @@ const HomePage = ({ values }: typeProps) => {
   }, [modalRef.current])
   useAOS();
 
+  const [quyDoi, setQuyDoi] = useState({
+    tiGia: 0.0 ,
+    soLuong: 0.0,
+    thanhTien: 0.0,
+  })
+
+  function format1(n : number) {
+    return  n.toFixed(0).replace(/./g, function(c, i, a) {
+      return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+    });
+  }
+
+  const fetchTiGia = async () => {
+    const res = await fetch("https://my.pay1688.vn/api/exchange_rates/current")
+    const data = await res.json()
+    setQuyDoi({...quyDoi, tiGia: data[0].rate, thanhTien: quyDoi.soLuong * data[0].rate})
+  }
+
+  const type0 = [
+    "không",
+    "một",
+    "hai",
+    "ba",
+    "bốn",
+    "năm",
+    "sáu",
+    "bảy",
+    "tám",
+    "chín"
+  ];
+  
+  const type1 = ["", "mươi", "trăm"];
+  
+  const type2 = ["", "nghìn", "triệu", "tỷ"];
+  
+  const currencyFormatter = (amount: number) => {
+    let value = amount.toString();
+    let result = "";
+    const strs = [];
+    for (let i = value.length - 1; i > -1; i -= 3) {
+      let tmp = value[i];
+      if (value[i - 1]) tmp = value[i - 1] + tmp;
+      if (value[i - 2]) tmp = value[i - 2] + tmp;
+      strs.push(tmp);
+    }
+    strs.forEach((v, index) => {
+      if (index > type2.length) return "The number is too big";
+      if (parseInt(v, 10) === 0) return;
+      let count = 0;
+      for (let i = v.length - 1; i > -1; i--) {
+        if (i === v.length - 1) result = type2[index] + " " + result;
+        if (v[i] !== "0")
+          result = type0[parseInt(v[i], 10)] + " " + type1[count] + " " + result;
+        count++;
+      }
+    });
+  
+    result = result.replaceAll("mươi năm", "mươi lăm");
+    result = result.replaceAll("mươi một", "mươi mốt");
+    result = result.replaceAll("một mươi", "mười");
+  
+    if (parseInt(strs[0], 10) === 0) return result + " đồng chẵn";
+    return result + " đồng";
+  };
   return (
     <div className="relative overflow-x-hidden">
       <div className="z-10 fixed md:top-[180px]  right-0 bottom-0 w-full md:w-fit">
@@ -222,11 +286,11 @@ const HomePage = ({ values }: typeProps) => {
                     <label>Nhập số tiền cần thanh toán hộ</label>
                     <div className="flex items-center gap-4">
                       <div className="flex items-center w-3/4 bg-gray-3 rounded-full px-4 font-bold mt-2">
-                        <input className="border-none outline-none p-2 w-full bg-gray-3 rounded-full" min={0} type="number" inputMode="decimal" placeholder="0"></input>
+                        <input value={quyDoi.soLuong} onChange={(e) => setQuyDoi({...quyDoi, soLuong: parseInt(e.target.value)})} step={0.1} className="border-none outline-none p-2 w-full bg-gray-3 rounded-full" min={0} type="number" inputMode="decimal" placeholder="0"></input>
                         <span>NDT(¥)</span>
                       </div>
                       <div className="w-1/4 mt-2">
-                        <button className="bg-blue-10 hover:bg-blue-20 text-white rounded-md w-full p-2">Tra cứu</button>
+                        <button onClick={fetchTiGia} className="bg-blue-10 hover:bg-blue-20 text-white rounded-md w-full p-2">Tra cứu</button>
                       </div>
                     </div>
                     <i className="text-sm">Số tệ càng nhiều, Pay1688 sẽ áp dụng tỉ giá càng thấp</i>
@@ -234,13 +298,13 @@ const HomePage = ({ values }: typeProps) => {
                   <div className="mt-6">
                     <div className="font-semibold text-blue-10">Kết quả quy đổi</div>
                     <div className="flex items-center w-full bg-gray-3 rounded-full px-4 py-3 font-bold mt-2">
-                      <span className="w-3/5">100.000</span>
+                      <span className="w-3/5">{format1(quyDoi.thanhTien)}</span>
                       <span className="w-2/5">Việt Nam Đồng</span>
                     </div>
-                    <i className="text-sm mx-3">Bằng chữ: Một trăm nghìn đồng</i>
+                    <i className="text-sm mx-3">Bằng chữ: {currencyFormatter(quyDoi.thanhTien)[0].toUpperCase() + currencyFormatter(quyDoi.thanhTien).slice(1)}</i>
                   </div>
                   <div className="text-sm mx-3 mt-4">
-                    Tỉ giá áp dụng: 1 ¥ = 3.730 đ
+                    Tỉ giá áp dụng: 1 ¥ = {quyDoi.tiGia} đ
                   </div>
                   <div>
                     <button className="w-full bg-blue-10 text-white hover:bg-blue-20 rounded-md p-2 mt-4">Tạo yêu cầu thanh toán hộ</button>
@@ -306,7 +370,7 @@ const HomePage = ({ values }: typeProps) => {
          bg-no-repeat bg-center bg-cover`}
       >
         <div data-aos="zoom-in-up" data-aos-duration="500" className="uppercase w-fit mx-auto px-2 mt-16 font-semibold text-blue-10 text-center lg:text-3xl text-xl">hệ thống - thanh toán - ký gửi hàng - trung quốc - việt nam</div>
-        <div className="flex justify-between container  pt-20 lg:pt-[117px] gap-16 lg:flex-row flex-col items-stretch">
+        <div className="flex justify-between container  pt-20 lg:pt-[70px] gap-16 lg:flex-row flex-col items-stretch">
           <div className="hover:scale-110 transition-all duration-300 flex flex-1 mx-auto">
             <div data-aos="fade-right" data-aos-duration="500" className="py-[28px] px-[41px] rounded-lg shadow-glass bg-blue-10 hover:bg-blue-20  duration-200 hover:border-4 hover:border-blue-5 hover:shadow-lg hover:shadow-blue-5 ">
               <Image
