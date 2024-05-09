@@ -624,9 +624,49 @@ const HomePage = ({ setting }: typeProps) => {
           </Form.Item>
           <hr />
           <br />
-          <Form.Item label="Service" name={["footer", "service"]}>
-            <Input.TextArea placeholder="Nhập text" />
+          <Form.Item name={"bct"} className="mt-2">
+            <Upload
+              listType="picture"
+              defaultFileList={renderValue(home?.bct, [
+                {
+                  name: home?.bct,
+                  url: home?.bct,
+                },
+              ])}
+            >
+              <Button>Chọn ảnh bộ công thương</Button>
+            </Upload>
           </Form.Item>
+          <div className="font-[500] my-4">Hỗ trợ</div>
+          <Form.List name={["supportFooter"]}>
+            
+            {(fields: any[], { add, remove }) => (
+              <div>
+                {fields.map((field, index) => (
+                  <div className=" py-[15px] mb-1" key={index}>
+                    <Form.Item name={[index, "title"]}>
+                      <Input placeholder="nhập nội dung" />
+                    </Form.Item>
+                    <Form.Item name={[index, "url"]}>
+                      <Input placeholder="nhập url" />
+                    </Form.Item>
+                    <Button
+                      onClick={() => remove(index)}
+                      className="!bg-[red] !text-white"
+                      type="dashed"
+                    >
+                      Xóa
+                    </Button>
+                  </div>
+                ))}
+                <Form.Item>
+                  <Button onClick={() => add()} style={{ width: "60%" }}>
+                    Thêm
+                  </Button>
+                </Form.Item>
+              </div>
+            )}
+          </Form.List>
           <hr />
           <br />
           <Form.Item label="Url In" name={["footer", "urlIn"]}>
@@ -647,19 +687,7 @@ const HomePage = ({ setting }: typeProps) => {
               <Input placeholder="Sẵn sàng hợp tác cùng chúng tôi?" />
             </Form.Item>
           </div>
-          <Form.Item name={"bct"} className="mt-2">
-            <Upload
-              listType="picture"
-              defaultFileList={renderValue(home?.bct, [
-                {
-                  name: home?.bct,
-                  url: home?.bct,
-                },
-              ])}
-            >
-              <Button>Chọn ảnh bộ công thương</Button>
-            </Upload>
-          </Form.Item>
+          
         </div>
           <hr />
           <br />

@@ -5,7 +5,6 @@ import { message } from 'antd';
 import api from "../api/graphql";
 import { status_api } from '@/api/common';
 import { asValueTypeAny, imagesRenderUrl, imagesRenderUrlFv } from '@/utils';
-import { type } from 'os';
 
 
 const useSettings = () => {

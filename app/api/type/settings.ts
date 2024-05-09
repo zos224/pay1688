@@ -80,7 +80,11 @@ export interface typeHomePage {
     partner?: {
         description?: string
         url?: string
-    }
+    },
+    supportFooter? : {
+        title?: string,
+        url?: string 
+    }[]
 
 }
 

@@ -14,19 +14,34 @@ import BaseButton from "../common/BaseButton";
 
 export default function Footer() {
   const [datas, setData] = React.useState<any>();
+  const [supports, setSupports] = React.useState<any[]>([]); // [
   const [bannerFooter, setBannerFooter] = React.useState<any>();
   const [logo, setLogo] = React.useState<any>();
   const [bct, setBCT] = React.useState<any>();
+  const [services, setServices] = React.useState<any[]>([]); // [
   const fetchApi = async () => {
     const { data } = await api.apiGetSetting({});
     setData(data?.data?.content?.home?.footer);
+    setSupports(data?.data?.content?.home?.supportFooter || []);
     setBannerFooter(data?.data?.content?.home?.bannerFooter || "");
     setLogo(data?.data?.content?.home?.logoWebsite);
     setBCT(data?.data?.content?.home?.bct);
   };
 
+  const fetchService = async () => {
+    const { data } = await api.apiGetNews({ type: 8, size: 10, page: 1 });
+    if (data?.status?.code === 200) {
+      const dataService = data?.data.map((item: any) => ({
+          title: item.title,
+          url: "/service/" + item.id,
+        }));
+      setServices(dataService);
+    }
+  }
+
   React.useEffect(() => {
     fetchApi();
+    fetchService();
   }, []);
   return (
     <footer className="bg-blue-10 text-white">
@@ -78,16 +93,27 @@ export default function Footer() {
         </div>
         <div>
           <p className="mb-5 text-2xl font-semibold">Dịch vụ</p>
-          {datas?.service || ""}
+          {
+            services.map((item, index) => (
+              <div className="mt-1">
+                <Link key={index} href={item.url || ""}>
+                  {item.title}
+                </Link>
+              </div>
+            ))
+          }
         </div>
         <div>
           <p className="mb-5 text-2xl font-semibold">Hỗ trợ</p>
-          <p className="mb-2">Hỗ trợ</p>
-          <p className="mb-2">Hướng dẫn tạo tài khoản</p>
-          <p className="mb-2">Hướng dẫn tạo đơn hàng</p>
-          <p className="mb-2">Tải tiện ích</p>
-          <p className="mb-2">Chính sách</p>
-          <p className="mb-2">Liên hệ</p>
+          {
+            supports.map((item, index) => (
+              <div className="mt-1">
+                <Link key={index} href={item.url || ""}>
+                  {item.title}
+                </Link>
+              </div>
+            ))
+          }
         </div>
       </div>
       <div className="bg-text-blue-20 text-center py-4 text-white font-medium text-lg">
